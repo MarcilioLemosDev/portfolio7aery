@@ -20,10 +20,10 @@ export type Planeta = {
 export const planetas: Planeta[] = [
   {
     id: 'veu-01',
-    tema: 'Velocidade',
-    titulo: 'Rápido é requisito, não diferencial.',
+    tema: 'A nova loja',
+    titulo: 'A loja do empresário mudou de endereço.',
     frase:
-      'Sites e apps que carregam num instante e respondem no toque — a primeira impressão do seu negócio é medida em segundos.',
+      'Se toda operação pode virar algoritmo, a nova loja é um funil online — aberta o dia inteiro, gerando leads enquanto o negócio opera.',
     img: '/space/mercurio.jpg',
     alt: 'Mosaico global de Mercúrio registrado pela sonda MESSENGER (NASA)',
     glow: 'rgba(205, 200, 192, 0.5)',
@@ -32,10 +32,10 @@ export const planetas: Planeta[] = [
   },
   {
     id: 'veu-02',
-    tema: 'Beleza',
-    titulo: 'O que é bonito convence primeiro.',
+    tema: 'Vitrine',
+    titulo: 'A vitrine é o topo do funil.',
     frase:
-      'Interface pensada até o último detalhe: hierarquia clara, movimento na medida certa e nada na tela sem motivo.',
+      'Redes sociais, site, app: é onde o cliente passa, olha e decide entrar. Vitrine boa não grita — posiciona e atrai.',
     img: '/space/venus.jpg',
     alt: 'Vista global de Vênus composta com dados das missões Magellan e Pioneer (NASA/JPL)',
     glow: 'rgba(255, 172, 92, 0.5)',
@@ -45,10 +45,10 @@ export const planetas: Planeta[] = [
   },
   {
     id: 'veu-03',
-    tema: 'Presença',
-    titulo: 'Presença digital é território.',
+    tema: 'Qualificação',
+    titulo: 'Dentro da loja, qualificação inteligente.',
     frase:
-      'Site, app e perfil trabalhando juntos — um endereço habitável para o seu negócio, onde os seus clientes já vivem.',
+      'O cliente recebe só a informação que precisa para avançar. Quem chega ao fim do funil, chega pronto para comprar.',
     img: '/space/terra.jpg',
     alt: 'A Terra vista pela tripulação da Apollo 17 — a Blue Marble (NASA)',
     glow: 'rgba(122, 172, 255, 0.5)',
@@ -56,10 +56,10 @@ export const planetas: Planeta[] = [
   },
   {
     id: 'veu-04',
-    tema: 'Ambição',
-    titulo: 'Feito com margem para crescer.',
+    tema: 'Fast checkout',
+    titulo: 'No fim do funil, um botão.',
     frase:
-      'Cada entrega nasce pronta para a próxima fase: novos fluxos, novos públicos, novas frentes do seu negócio.',
+      'O lead qualificado cai direto no WhatsApp do seu time, pronto para fechar. Sem formulário infinito, sem fricção.',
     img: '/space/marte.jpg',
     alt: 'Globo de Marte com os vulcões de Tharsis e o Valles Marineris (NASA/JPL/Malin Space Science Systems)',
     glow: 'rgba(255, 142, 92, 0.5)',
@@ -68,10 +68,10 @@ export const planetas: Planeta[] = [
   },
   {
     id: 'veu-05',
-    tema: 'Escala',
+    tema: 'Velocidade e escala',
     titulo: 'Arquitetura que aguenta o sucesso.',
     frase:
-      'Estrutura sólida do primeiro acesso ao pico de tráfego — crescer não pode ser motivo de colapso.',
+      'Carregamento num instante e estrutura sólida do primeiro acesso ao pico de tráfego — crescer não pode ser motivo de colapso.',
     img: '/space/jupiter.jpg',
     alt: 'Retrato de Júpiter em disco completo com a Grande Mancha Vermelha, pelo Hubble (NASA/ESA, programa OPAL)',
     glow: 'rgba(255, 200, 152, 0.42)',

@@ -35,6 +35,44 @@ existe além:
 Se o fio esticar em rodadas futuras: galáxias, constelações,
 nebulosas, estrelas nomeadas.
 
+## Como o produto se vende: a nova loja
+
+O paralelo central da venda (fio do site, a partir da R6): quem quer
+empreender pensa em "abrir uma loja". O produto da 7Aery **é** a loja —
+na forma moderna. Se toda operação pode ser traduzida em algoritmo, o
+funil online é a própria estrutura que gera leads para o empresário:
+
+1. **Vitrine** (topo do funil) — redes sociais, site, app: onde o
+   cliente passa, olha e decide entrar.
+2. **Qualificação inteligente** — dentro da "loja", o cliente recebe só
+   a informação necessária para se qualificar; quem chega ao fim chega
+   pronto.
+3. **Fast checkout** — um botão no fim do funil: o lead qualificado cai
+   direto no WhatsApp do time comercial (como no site da MI6) ou no
+   fluxo de aplicação.
+
+Referências de venda estudadas (mesma turma de amigos dev):
+
+- **lerian.studio** — claim direto + sustentação objetiva; produtos como
+  módulos nomeados; sem poesia vazia.
+- **firstbase.io** — vende o resultado ("start your dream business"),
+  nunca a tarefa; **prova social imediatamente após o hero**;
+  complexidade quebrada em passos simples; autoridade e escala como
+  validação. É o motivo de a seção da MI6 vir logo depois do Sol.
+
+## Método de desenvolvimento: Triplo Diamante
+
+Método próprio do Marcílio (contexto para as rodadas — **não** vai ao
+site literalmente):
+
+1. **Entender** — levantar as informações necessárias para a solução.
+2. **Desenvolvimento livre** — várias versões sem conceito de "errado",
+   até chegar à versão final (estas rodadas de dogfooding são isso).
+3. **Deploy.**
+
+No site, o método aparece só como alusão na linha do processo em
+Projetos: "Entender → versões livres → deploy".
+
 ## Escassez
 
 O desenvolvedor não busca clientes; clientes vêm até ele.
@@ -99,6 +137,12 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   revelar produto e intuito da marca (claim + sustentação, arco
   promessa→pilares→prova→ação); prova social "Último projeto entregue"
   com logo da MI6 Consórcio linkando mi6consorcio.com.br.
+- **R6 (feita): o fio da loja** — prova social movida para logo após o
+  Sol (posição firstbase); véus 01–04 contam a tese da nova loja
+  (mudou de endereço → vitrine → qualificação → fast checkout) e 05–08
+  seguem com os pilares de execução; produtos na linguagem do funil
+  (vitrine essencial / vitrine e loja / o funil inteiro) + linha do
+  processo "Entender → versões livres → deploy".
 - **Dogfooding via Vercel**: cada push = Preview URL; o proprietário
   testa e traz ajustes.
 - **Rodadas livres**: refinamentos guiados pelo uso (copy, backend dos

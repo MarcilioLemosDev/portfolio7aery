@@ -19,15 +19,17 @@ estático, deploy na Vercel (preview por branch).
 - **Astro 7**, `output: 'static'`, página única (`src/pages/index.astro`)
   com `<head>` inline + sitemap (`@astrojs/sitemap`)
 - Narrativa (componentes em `src/components/`): `Heroi` (Sol, pinned +
-  véu) → `Planeta` × 8 (ids `veu-01`…`veu-08`, dados em
-  `src/dados/planetas.ts`) → `Produtos` (fila) → `ProvaSocial` (último
-  projeto: MI6, logo em `public/logo-mi6.png`) → `Rede` (rede for tech)
-  → `Rodape`; `Hud` (appbar + telemetria + trilho de paradas) e
-  `Aplicacao` (diálogo) fora do `<main>`
-- **A narrativa dos véus NÃO nomeia os planetas**: as imagens são os
-  planetas, mas o texto é claim direto + sustentação objetiva sobre o
-  produto/marca (arco tipo lerian.studio: promessa → pilares →
-  componentes → prova → ação). Temas ficam nos eyebrows (`Véu NN · Tema`)
+  véu) → `ProvaSocial` (posição firstbase: logo após o herói; MI6, logo
+  em `public/logo-mi6.png`) → `Planeta` × 8 (ids `veu-01`…`veu-08`,
+  dados em `src/dados/planetas.ts`) → `Produtos` (fila) → `Rede` (rede
+  for tech) → `Rodape`; `Hud` (appbar + telemetria + trilho de paradas)
+  e `Aplicacao` (diálogo) fora do `<main>`
+- **A narrativa dos véus NÃO nomeia os planetas** e segue o fio da
+  "nova loja" (ver `docs/CONCEITO.md`): véus 01–04 = tese → vitrine →
+  qualificação → fast checkout; véus 05–08 = pilares de execução.
+  Claim direto + sustentação objetiva; temas nos eyebrows
+  (`Véu NN · Tema`). O método Triplo Diamante só aparece como alusão
+  (linha `.processo` em Produtos)
 - Appbar (`Hud.astro`): marca à esquerda; à direita links âncora
   (`data-stop`), profundidade % e CTA `Aplicar` (`data-aplicar`);
   ganha fundo blur com a classe `.rolou` após 60px de rolagem

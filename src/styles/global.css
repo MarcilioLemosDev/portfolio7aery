@@ -570,10 +570,16 @@ main {
   text-align: center;
 }
 
+.processo {
+  color: var(--faint);
+  font-size: 0.58rem;
+  letter-spacing: 0.26em;
+}
+
 /* ── Prova social · último projeto ───────────────────────────────────── */
 .prova {
   position: relative;
-  padding: 3.5rem 1.5rem 5.5rem;
+  padding: 5rem 1.5rem 4rem;
   display: grid;
   justify-items: center;
   gap: 1.3rem;
@@ -607,6 +613,12 @@ main {
 .prova-cliente .mono {
   font-size: 0.56rem;
   letter-spacing: 0.18em;
+}
+
+.prova-frase {
+  color: var(--dim);
+  font-size: 0.95rem;
+  max-width: 28rem;
 }
 
 /* ── A Rede · além do sistema ────────────────────────────────────────── */
