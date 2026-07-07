@@ -95,9 +95,17 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.1rem 1.4rem;
+  padding: 0.9rem 1.4rem;
   color: var(--dim);
-  pointer-events: none;
+  transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+  border-bottom: 1px solid transparent;
+}
+
+.hud-top.rolou {
+  background: rgba(4, 5, 10, 0.72);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  border-bottom-color: var(--line);
 }
 
 .hud-top .mono {
@@ -108,11 +116,61 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
+  color: var(--ink);
+  transition: opacity 0.25s;
+}
+
+.hud-brand:hover {
+  opacity: 0.8;
 }
 
 .hud-brand img {
   width: 12px;
   height: 12px;
+}
+
+.hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.hud-link {
+  color: var(--dim);
+  transition: color 0.25s;
+}
+
+.hud-link:hover {
+  color: var(--ink);
+}
+
+.hud-depth {
+  color: var(--faint);
+}
+
+.hud-cta {
+  padding: 0.5rem 1.1rem;
+  border-radius: 99px;
+  background: var(--gold);
+  color: #171006;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  transition: filter 0.25s;
+}
+
+.hud-cta:hover {
+  filter: brightness(1.09);
+}
+
+@media (max-width: 760px) {
+  .hud-link,
+  .hud-depth {
+    display: none;
+  }
+
+  .hud-nav {
+    gap: 0.8rem;
+  }
 }
 
 .hud-progress {
@@ -400,11 +458,11 @@ main {
 }
 
 .planet h2 {
-  font-size: clamp(2.3rem, 6.5vw, 4.1rem);
-  font-weight: 295;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  line-height: 1.05;
+  font-size: clamp(1.9rem, 4.6vw, 3rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  max-width: 22ch;
 }
 
 .p-frase {
@@ -510,6 +568,45 @@ main {
   color: var(--faint);
   font-size: 0.6rem;
   text-align: center;
+}
+
+/* ── Prova social · último projeto ───────────────────────────────────── */
+.prova {
+  position: relative;
+  padding: 3.5rem 1.5rem 5.5rem;
+  display: grid;
+  justify-items: center;
+  gap: 1.3rem;
+  text-align: center;
+}
+
+.prova-eyebrow {
+  color: var(--faint);
+  font-size: 0.6rem;
+}
+
+.prova-cliente {
+  display: grid;
+  justify-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: var(--faint);
+  opacity: 0.82;
+  transition: opacity 0.25s;
+}
+
+.prova-cliente:hover {
+  opacity: 1;
+}
+
+.prova-cliente img {
+  height: 34px;
+  width: auto;
+}
+
+.prova-cliente .mono {
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
 }
 
 /* ── A Rede · além do sistema ────────────────────────────────────────── */

@@ -19,9 +19,19 @@ estático, deploy na Vercel (preview por branch).
 - **Astro 7**, `output: 'static'`, página única (`src/pages/index.astro`)
   com `<head>` inline + sitemap (`@astrojs/sitemap`)
 - Narrativa (componentes em `src/components/`): `Heroi` (Sol, pinned +
-  véu) → `Planeta` × 8 (dados em `src/dados/planetas.ts`) → `Produtos`
-  (órbitas/fila) → `Rede` (rede for tech) → `Rodape`; `Hud` (telemetria)
-  e `Aplicacao` (diálogo) fora do `<main>`
+  véu) → `Planeta` × 8 (ids `veu-01`…`veu-08`, dados em
+  `src/dados/planetas.ts`) → `Produtos` (fila) → `ProvaSocial` (último
+  projeto: MI6, logo em `public/logo-mi6.png`) → `Rede` (rede for tech)
+  → `Rodape`; `Hud` (appbar + telemetria + trilho de paradas) e
+  `Aplicacao` (diálogo) fora do `<main>`
+- **A narrativa dos véus NÃO nomeia os planetas**: as imagens são os
+  planetas, mas o texto é claim direto + sustentação objetiva sobre o
+  produto/marca (arco tipo lerian.studio: promessa → pilares →
+  componentes → prova → ação). Temas ficam nos eyebrows (`Véu NN · Tema`)
+- Appbar (`Hud.astro`): marca à esquerda; à direita links âncora
+  (`data-stop`), profundidade % e CTA `Aplicar` (`data-aplicar`);
+  ganha fundo blur com a classe `.rolou` após 60px de rolagem
+  (toggle no handler de scroll do `index.astro`)
 - **Todo o comportamento client vive em um único `<script>` no
   `index.astro`** (empacotado pelo Vite): Lenis + ticker GSAP, timelines
   ScrollTrigger, céu estrelado em canvas, HUD (progresso/paradas/nav) e

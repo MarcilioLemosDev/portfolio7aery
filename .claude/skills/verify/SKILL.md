@@ -29,10 +29,15 @@ Fluxos que valem dirigir (cobertos na migração para Astro):
 
 1. **Véu do herói** — carregar (velado), rolar ~800px (Sol surgindo).
    Esperar ~1,2s após cada rolagem (scrub).
-2. **Jornada** — `scrollIntoView` em `#terra`, `#saturno` (formato largo,
-   anéis sem corte), `#netuno`, `#orbitas`, `#rede` + screenshots.
-3. **HUD** — clicar `button[aria-label="Ir para jupiter"]`, conferir que a
-   seção chega ao viewport; `[data-hud-pct]` > 0 após rolar.
+2. **Jornada** — seções de véu têm ids `#veu-01`…`#veu-08` (Saturno é o
+   `#veu-06`, formato largo). `scrollIntoView` + screenshots; para flagrar
+   a entrada orbital, posicionar o topo da seção em ~62–78% do viewport
+   (offset lateral alterna por índice). Depois `#orbitas`, `#prova`, `#rede`.
+3. **Appbar/HUD** — links `Projetos`/`A rede` e trilho lateral navegam
+   (`data-stop`); CTA `Aplicar` da appbar abre o diálogo; classe `.rolou`
+   na `.hud-top` após rolar 60px; `[data-hud-pct]` > 0. Prova social:
+   `.prova-cliente` com href mi6consorcio.com.br, `target=_blank` e
+   `rel=noopener`.
 4. **Fila de espera** — abrir "Aplicar à fila de espera"; submit vazio deve
    deixar `[data-apply-done]` ainda `hidden` (validação nativa). Preencher
    `#apply-nome`, `#apply-email`, `#apply-msg-projeto` → `[data-apply-done]`

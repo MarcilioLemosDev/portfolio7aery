@@ -93,6 +93,12 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   recorte ainda mais dissolvido, Sol do herói corrigido no mobile (vmax)
   e produtos sem metáfora espacial (referência de tom: lerian.studio —
   nomes funcionais, descrição objetiva, escassez mantida).
+- **R5 (feita): appbar, narrativa e prova social** — appbar estilo
+  lerian (marca, Projetos, A rede, profundidade e CTA Aplicar; fundo
+  blur após rolar); os véus deixaram de nomear os planetas e passaram a
+  revelar produto e intuito da marca (claim + sustentação, arco
+  promessa→pilares→prova→ação); prova social "Último projeto entregue"
+  com logo da MI6 Consórcio linkando mi6consorcio.com.br.
 - **Dogfooding via Vercel**: cada push = Preview URL; o proprietário
   testa e traz ajustes.
 - **Rodadas livres**: refinamentos guiados pelo uso (copy, backend dos

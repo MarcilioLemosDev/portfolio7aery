@@ -9,6 +9,7 @@ import Hud from '../components/Hud.astro';
 import Heroi from '../components/Heroi.astro';
 import Planeta from '../components/Planeta.astro';
 import Produtos from '../components/Produtos.astro';
+import ProvaSocial from '../components/ProvaSocial.astro';
 import Rede from '../components/Rede.astro';
 import Rodape from '../components/Rodape.astro';
 import Aplicacao from '../components/Aplicacao.astro';
@@ -52,6 +53,7 @@ const descricao =
       <Heroi />
       {planetas.map((planeta, indice) => <Planeta planeta={planeta} indice={indice} />)}
       <Produtos />
+      <ProvaSocial />
       <Rede />
     </main>
     <Rodape />
@@ -243,6 +245,16 @@ const descricao =
 
         gsap
           .timeline({
+            scrollTrigger: { trigger: '#prova', start: 'top 88%', end: 'top 55%', scrub: 1 },
+          })
+          .fromTo(
+            '.prova > *',
+            { y: 26, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.12, ease: 'power2.out' }
+          );
+
+        gsap
+          .timeline({
             scrollTrigger: { trigger: '#rede', start: 'top 75%', end: 'top 25%', scrub: 1 },
           })
           .fromTo(
@@ -264,12 +276,14 @@ const descricao =
       /* ── HUD: progresso, paradas e navegação ─────────────────────────── */
       const progressEl = document.querySelector<HTMLElement>('[data-hud-progress]');
       const pctEl = document.querySelector<HTMLElement>('[data-hud-pct]');
+      const topBar = document.querySelector<HTMLElement>('.hud-top');
       function onScroll() {
         const doc = document.documentElement;
         const max = doc.scrollHeight - doc.clientHeight;
         const p = max > 0 ? doc.scrollTop / max : 0;
         if (progressEl) progressEl.style.transform = `scaleX(${p})`;
         if (pctEl) pctEl.textContent = String(Math.round(p * 100));
+        topBar?.classList.toggle('rolou', doc.scrollTop > 60);
       }
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();

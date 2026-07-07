@@ -1,11 +1,13 @@
-// Dados da travessia (Sol → Netuno). Imagens em public/space/ (NASA, domínio
-// público; proveniência em public/space/credits.json). Discos usam crop
-// circular; panorâmicas (Saturno) usam shape "wide".
+// Dados da travessia. As imagens continuam sendo os planetas (NASA/ESA,
+// proveniência em public/space/credits.json), mas a narrativa não os nomeia:
+// cada véu revela um pedaço do produto e do intuito da marca — claim direto
+// no título, sustentação objetiva na frase (referência de tom: lerian.studio).
+// Discos usam crop circular com máscara suave; panorâmicas usam shape "wide".
 
 export type Planeta = {
   id: string;
-  nome: string;
   tema: string;
+  titulo: string;
   frase: string;
   img: string;
   alt: string;
@@ -17,11 +19,11 @@ export type Planeta = {
 
 export const planetas: Planeta[] = [
   {
-    id: 'mercurio',
-    nome: 'Mercúrio',
+    id: 'veu-01',
     tema: 'Velocidade',
+    titulo: 'Rápido é requisito, não diferencial.',
     frase:
-      'O planeta mais veloz do sistema. Performance não é detalhe técnico — é a primeira impressão.',
+      'Sites e apps que carregam num instante e respondem no toque — a primeira impressão do seu negócio é medida em segundos.',
     img: '/space/mercurio.jpg',
     alt: 'Mosaico global de Mercúrio registrado pela sonda MESSENGER (NASA)',
     glow: 'rgba(205, 200, 192, 0.5)',
@@ -29,11 +31,11 @@ export const planetas: Planeta[] = [
     zoom: 1.03,
   },
   {
-    id: 'venus',
-    nome: 'Vênus',
+    id: 'veu-02',
     tema: 'Beleza',
+    titulo: 'O que é bonito convence primeiro.',
     frase:
-      'O ponto mais brilhante do céu noturno. Interface é o que convence antes de qualquer palavra.',
+      'Interface pensada até o último detalhe: hierarquia clara, movimento na medida certa e nada na tela sem motivo.',
     img: '/space/venus.jpg',
     alt: 'Vista global de Vênus composta com dados das missões Magellan e Pioneer (NASA/JPL)',
     glow: 'rgba(255, 172, 92, 0.5)',
@@ -42,22 +44,22 @@ export const planetas: Planeta[] = [
     pos: '50% 48%',
   },
   {
-    id: 'terra',
-    nome: 'Terra',
+    id: 'veu-03',
     tema: 'Presença',
+    titulo: 'Presença digital é território.',
     frase:
-      'O único lugar onde os seus clientes vivem. A sua presença digital precisa ser habitável.',
+      'Site, app e perfil trabalhando juntos — um endereço habitável para o seu negócio, onde os seus clientes já vivem.',
     img: '/space/terra.jpg',
     alt: 'A Terra vista pela tripulação da Apollo 17 — a Blue Marble (NASA)',
     glow: 'rgba(122, 172, 255, 0.5)',
     shape: 'disc',
   },
   {
-    id: 'marte',
-    nome: 'Marte',
+    id: 'veu-04',
     tema: 'Ambição',
+    titulo: 'Feito com margem para crescer.',
     frase:
-      'O próximo mundo da humanidade. Para quem não aceita o tamanho atual do próprio negócio.',
+      'Cada entrega nasce pronta para a próxima fase: novos fluxos, novos públicos, novas frentes do seu negócio.',
     img: '/space/marte.jpg',
     alt: 'Globo de Marte com os vulcões de Tharsis e o Valles Marineris (NASA/JPL/Malin Space Science Systems)',
     glow: 'rgba(255, 142, 92, 0.5)',
@@ -65,44 +67,44 @@ export const planetas: Planeta[] = [
     pos: '46% 47%',
   },
   {
-    id: 'jupiter',
-    nome: 'Júpiter',
+    id: 'veu-05',
     tema: 'Escala',
+    titulo: 'Arquitetura que aguenta o sucesso.',
     frase:
-      'Grande o bastante para blindar o sistema inteiro. Arquitetura que cresce sem colapsar.',
+      'Estrutura sólida do primeiro acesso ao pico de tráfego — crescer não pode ser motivo de colapso.',
     img: '/space/jupiter.jpg',
     alt: 'Retrato de Júpiter em disco completo com a Grande Mancha Vermelha, pelo Hubble (NASA/ESA, programa OPAL)',
     glow: 'rgba(255, 200, 152, 0.42)',
     shape: 'disc',
   },
   {
-    id: 'saturno',
-    nome: 'Saturno',
+    id: 'veu-06',
     tema: 'Precisão',
+    titulo: 'Engenharia é disciplina.',
     frase:
-      'Anéis matematicamente perfeitos. Engenharia é disciplina — nunca improviso.',
+      'Código revisado, testado e medido antes de ir ao ar. Régua, nunca improviso.',
     img: '/space/saturno.jpg',
     alt: 'Mosaico de Saturno e seus anéis registrado pela sonda Cassini (NASA/JPL/Space Science Institute)',
     glow: 'rgba(240, 218, 170, 0.4)',
     shape: 'wide',
   },
   {
-    id: 'urano',
-    nome: 'Urano',
+    id: 'veu-07',
     tema: 'Perspectiva',
+    titulo: 'Poucos projetos, atenção inteira.',
     frase:
-      'Gira num eixo que nenhum outro planeta ousou. Ver diferente é método de trabalho.',
+      'O modelo sob aplicação existe por isso: cada trabalho recebe o cuidado de quem não está correndo para o próximo.',
     img: '/space/urano.jpg',
     alt: 'Urano visto pela Voyager 2 (NASA/JPL-Caltech)',
     glow: 'rgba(162, 232, 226, 0.45)',
     shape: 'disc',
   },
   {
-    id: 'netuno',
-    nome: 'Netuno',
+    id: 'veu-08',
     tema: 'Profundidade',
+    titulo: 'O raro não fica na superfície.',
     frase:
-      'O mais distante e o mais raro. O que tem valor quase nunca está na superfície.',
+      'Trabalho profundo, feito com tempo. E, no fim da travessia, um convite para o que vem além.',
     img: '/space/netuno.jpg',
     alt: 'Netuno em disco completo, registrado pela Voyager 2 (NASA/JPL)',
     glow: 'rgba(112, 152, 255, 0.5)',
@@ -112,15 +114,15 @@ export const planetas: Planeta[] = [
 ];
 
 export const paradas = [
-  { id: 'sol', label: 'SOL' },
-  { id: 'mercurio', label: 'MER' },
-  { id: 'venus', label: 'VÊN' },
-  { id: 'terra', label: 'TER' },
-  { id: 'marte', label: 'MAR' },
-  { id: 'jupiter', label: 'JÚP' },
-  { id: 'saturno', label: 'SAT' },
-  { id: 'urano', label: 'URA' },
-  { id: 'netuno', label: 'NET' },
+  { id: 'sol', label: 'TOPO' },
+  { id: 'veu-01', label: '01' },
+  { id: 'veu-02', label: '02' },
+  { id: 'veu-03', label: '03' },
+  { id: 'veu-04', label: '04' },
+  { id: 'veu-05', label: '05' },
+  { id: 'veu-06', label: '06' },
+  { id: 'veu-07', label: '07' },
+  { id: 'veu-08', label: '08' },
   { id: 'orbitas', label: 'PRJ' },
   { id: 'rede', label: '∞' },
 ];
