@@ -1,0 +1,34 @@
+---
+import type { Planeta } from '../dados/planetas';
+
+interface Props {
+  planeta: Planeta;
+  indice: number;
+}
+
+const { planeta, indice } = Astro.props;
+const numero = String(indice + 1).padStart(2, '0');
+const estiloImg = [
+  `object-position:${planeta.pos ?? '50% 50%'}`,
+  planeta.zoom ? `transform:scale(${planeta.zoom})` : null,
+]
+  .filter(Boolean)
+  .join(';');
+---
+
+<section id={planeta.id} class="planet" style={`--glow:${planeta.glow}`}>
+  <div class={planeta.shape === 'wide' ? 'orb wide' : 'orb'}>
+    <img
+      src={planeta.img}
+      alt={planeta.alt}
+      loading="lazy"
+      decoding="async"
+      style={estiloImg}
+    />
+  </div>
+  <div class="p-copy">
+    <p class="mono p-eyebrow">Véu {numero} · {planeta.tema}</p>
+    <h2>{planeta.nome}</h2>
+    <p class="p-frase">{planeta.frase}</p>
+  </div>
+</section>

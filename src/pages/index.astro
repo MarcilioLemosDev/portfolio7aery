@@ -1,0 +1,360 @@
+---
+import '@fontsource-variable/space-grotesk';
+import '@fontsource/ibm-plex-mono';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+
+import { planetas } from '../dados/planetas';
+import Hud from '../components/Hud.astro';
+import Heroi from '../components/Heroi.astro';
+import Planeta from '../components/Planeta.astro';
+import Produtos from '../components/Produtos.astro';
+import Rede from '../components/Rede.astro';
+import Rodape from '../components/Rodape.astro';
+import Aplicacao from '../components/Aplicacao.astro';
+
+const site = Astro.site ?? new URL('http://localhost:4321');
+const canonical = new URL('/', site).href;
+const ogImg = new URL('/space/sol.jpg', site).href;
+const titulo = 'Marcílio Lemos — Desenvolvedor de Software';
+const descricao =
+  'Cada rolagem remove um véu. Uma travessia do Sol até onde o sistema acaba — sites, apps e a primeira rede social for tech do mundo. Trabalhos somente por aplicação.';
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#04050a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{titulo}</title>
+    <meta name="description" content={descricao} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={titulo} />
+    <meta
+      property="og:description"
+      content="Cada rolagem remove um véu. Trabalhos somente por aplicação."
+    />
+    <meta property="og:image" content={ogImg} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titulo} />
+    <meta name="twitter:image" content={ogImg} />
+  </head>
+  <body>
+    <canvas class="starfield" aria-hidden="true"></canvas>
+    <Hud />
+    <div class="grain" aria-hidden="true"></div>
+    <main>
+      <Heroi />
+      {planetas.map((planeta, indice) => <Planeta planeta={planeta} indice={indice} />)}
+      <Produtos />
+      <Rede />
+    </main>
+    <Rodape />
+    <Aplicacao />
+
+    <script>
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+      import Lenis from 'lenis';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const motionOk = window.matchMedia(
+        '(prefers-reduced-motion: no-preference)'
+      ).matches;
+
+      /* ── Scroll suave (Lenis dirigido pelo ticker do GSAP) ───────────── */
+      let lenis: Lenis | null = null;
+      if (motionOk) {
+        lenis = new Lenis({ lerp: 0.115 });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis!.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      /* ── Céu estrelado com paralaxe ──────────────────────────────────── */
+      (function ceu() {
+        const canvas = document.querySelector<HTMLCanvasElement>('.starfield');
+        const ctx = canvas?.getContext('2d');
+        if (!canvas || !ctx) return;
+
+        const reduced = !motionOk;
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+        let w = 0;
+        let h = 0;
+        let raf = 0;
+        let stars: {
+          x: number;
+          y: number;
+          r: number;
+          a: number;
+          tw: number;
+          ph: number;
+          sp: number;
+        }[] = [];
+
+        function gen() {
+          w = window.innerWidth;
+          h = window.innerHeight;
+          canvas!.width = w * dpr;
+          canvas!.height = h * dpr;
+          canvas!.style.width = `${w}px`;
+          canvas!.style.height = `${h}px`;
+          ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+          const n = Math.round((w * h) / 2600);
+          stars = Array.from({ length: n }, () => {
+            const layer = Math.random();
+            return {
+              x: Math.random() * w,
+              y: Math.random() * h,
+              r: 0.4 + Math.random() * (layer > 0.86 ? 1.5 : 0.85),
+              a: 0.22 + Math.random() * 0.6,
+              tw: 0.5 + Math.random() * 1.6,
+              ph: Math.random() * Math.PI * 2,
+              sp: 0.06 + layer * 0.45,
+            };
+          });
+        }
+
+        function draw(t: number) {
+          const scroll = window.scrollY;
+          ctx!.clearRect(0, 0, w, h);
+          ctx!.fillStyle = '#cfd8ff';
+          for (const s of stars) {
+            const yy = (((s.y - scroll * s.sp) % h) + h) % h;
+            const tw = reduced ? 1 : 0.72 + 0.28 * Math.sin((t / 1000) * s.tw + s.ph);
+            ctx!.globalAlpha = s.a * tw;
+            ctx!.beginPath();
+            ctx!.arc(s.x, yy, s.r, 0, 7);
+            ctx!.fill();
+          }
+          ctx!.globalAlpha = 1;
+          if (!reduced) raf = requestAnimationFrame(draw);
+        }
+
+        function start() {
+          if (reduced) draw(0);
+          else raf = requestAnimationFrame(draw);
+        }
+
+        gen();
+        start();
+        window.addEventListener('resize', () => {
+          gen();
+          if (reduced) draw(0);
+        });
+        document.addEventListener('visibilitychange', () => {
+          cancelAnimationFrame(raf);
+          if (!document.hidden) start();
+        });
+      })();
+
+      /* ── Véus: timelines com scrub (só com movimento permitido) ──────── */
+      if (motionOk) {
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: '#sol',
+              start: 'top top',
+              end: '+=85%',
+              scrub: 0.7,
+              pin: true,
+            },
+          })
+          .fromTo('.hero-veil', { opacity: 0.93 }, { opacity: 0, ease: 'none' }, 0)
+          .fromTo(
+            '.hero-sun',
+            { scale: 0.94, filter: 'brightness(0.35) saturate(0.8)' },
+            { scale: 1, filter: 'brightness(1) saturate(1)', ease: 'none' },
+            0
+          )
+          .to('.hero-hint', { opacity: 0, duration: 0.25 }, 0.05)
+          .to('.hero-copy', { y: -36, opacity: 0.9, ease: 'none' }, 0.55);
+
+        gsap.utils.toArray<HTMLElement>('.planet').forEach((sec) => {
+          gsap
+            .timeline({
+              scrollTrigger: { trigger: sec, start: 'top 80%', end: 'top 18%', scrub: 1 },
+            })
+            .fromTo(
+              sec.querySelector('.orb'),
+              { opacity: 0, scale: 1.13, filter: 'brightness(0.08)' },
+              { opacity: 1, scale: 1, filter: 'brightness(1)', ease: 'none' },
+              0
+            )
+            .fromTo(
+              sec.querySelectorAll('.p-copy > *'),
+              { y: 36, opacity: 0 },
+              { y: 0, opacity: 1, stagger: 0.09, ease: 'power2.out' },
+              0.15
+            );
+        });
+
+        gsap
+          .timeline({
+            scrollTrigger: { trigger: '#orbitas', start: 'top 75%', end: 'top 30%', scrub: 1 },
+          })
+          .fromTo(
+            '.orbitas-head > *',
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.08, ease: 'power2.out' },
+            0
+          )
+          .fromTo(
+            '.tier',
+            { y: 44, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.1, ease: 'power2.out' },
+            0.2
+          )
+          .fromTo('.scarcity', { opacity: 0 }, { opacity: 1 }, 0.5);
+
+        gsap
+          .timeline({
+            scrollTrigger: { trigger: '#rede', start: 'top 70%', end: 'top 15%', scrub: 1 },
+          })
+          .fromTo(
+            '.rede-bg',
+            { opacity: 0, scale: 1.06 },
+            { opacity: 1, scale: 1, ease: 'none' },
+            0
+          )
+          .fromTo(
+            '.rede-copy > *',
+            { y: 34, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.09, ease: 'power2.out' },
+            0.2
+          );
+
+        window.addEventListener('load', () => ScrollTrigger.refresh());
+      }
+
+      /* ── HUD: progresso, paradas e navegação ─────────────────────────── */
+      const progressEl = document.querySelector<HTMLElement>('[data-hud-progress]');
+      const pctEl = document.querySelector<HTMLElement>('[data-hud-pct]');
+      function onScroll() {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - doc.clientHeight;
+        const p = max > 0 ? doc.scrollTop / max : 0;
+        if (progressEl) progressEl.style.transform = `scaleX(${p})`;
+        if (pctEl) pctEl.textContent = String(Math.round(p * 100));
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      const stopButtons = Array.from(
+        document.querySelectorAll<HTMLButtonElement>('[data-stop]')
+      );
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              stopButtons.forEach((b) => {
+                b.dataset.active = String(b.dataset.stop === id);
+              });
+            }
+          }
+        },
+        { rootMargin: '-45% 0px -45% 0px' }
+      );
+      stopButtons.forEach((b) => {
+        const el = document.getElementById(b.dataset.stop!);
+        if (el) io.observe(el);
+        b.addEventListener('click', () => {
+          const alvo = document.getElementById(b.dataset.stop!);
+          if (!alvo) return;
+          if (lenis) lenis.scrollTo(alvo, { duration: 1.6 });
+          else alvo.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      /* ── Aplicação: diálogo único (projeto / rede) ───────────────────── */
+      const dialog = document.querySelector<HTMLDialogElement>('[data-apply-dialog]');
+      const formView = document.querySelector<HTMLElement>('[data-apply-form]');
+      const doneView = document.querySelector<HTMLElement>('[data-apply-done]');
+      const formEl = document.querySelector<HTMLFormElement>('[data-apply-form-el]');
+      const kicker = document.querySelector<HTMLElement>('[data-apply-kicker]');
+      const titleEl = document.querySelector<HTMLElement>('[data-apply-title]');
+      const presetEl = document.querySelector<HTMLElement>('[data-apply-preset]');
+      const camposProjeto = Array.from(
+        document.querySelectorAll<HTMLElement>('[data-campo-projeto]')
+      );
+      const camposRede = Array.from(
+        document.querySelectorAll<HTMLElement>('[data-campo-rede]')
+      );
+
+      let variante: 'projeto' | 'rede' = 'projeto';
+      let preset: string | null = null;
+
+      function setCampo(campo: HTMLElement, ativo: boolean, obrigatorios: string[]) {
+        campo.hidden = !ativo;
+        campo
+          .querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea')
+          .forEach((el) => {
+            el.disabled = !ativo;
+            el.required = ativo && obrigatorios.includes(el.name);
+          });
+      }
+
+      function abrir(v: 'projeto' | 'rede', p?: string) {
+        if (!dialog || !formView || !doneView || !formEl) return;
+        variante = v;
+        preset = p ?? null;
+        formView.hidden = false;
+        doneView.hidden = true;
+        formEl.reset();
+        const projeto = v === 'projeto';
+        if (kicker) kicker.textContent = projeto ? 'Fila de espera' : 'Construir a rede';
+        if (titleEl)
+          titleEl.textContent = projeto
+            ? 'Aplicar para um projeto'
+            : 'Aplicar para construir a primeira rede social for tech';
+        if (presetEl) {
+          presetEl.hidden = !preset;
+          presetEl.textContent = preset ? `Missão: ${preset}` : '';
+        }
+        camposProjeto.forEach((c) => setCampo(c, projeto, ['mensagem']));
+        camposRede.forEach((c) => setCampo(c, !projeto, ['stack', 'mensagem_rede']));
+        dialog.showModal();
+      }
+
+      document.querySelectorAll<HTMLElement>('[data-aplicar]').forEach((b) => {
+        b.addEventListener('click', () =>
+          abrir(b.dataset.aplicar as 'projeto' | 'rede', b.dataset.preset)
+        );
+      });
+      document.querySelectorAll<HTMLElement>('[data-apply-close]').forEach((b) => {
+        b.addEventListener('click', () => dialog?.close());
+      });
+      dialog?.addEventListener('click', (e) => {
+        if (e.target === dialog) dialog.close();
+      });
+
+      formEl?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const dados = Object.fromEntries(new FormData(formEl).entries());
+        const entry = {
+          quando: new Date().toISOString(),
+          tipo: variante,
+          missao: preset,
+          ...dados,
+        };
+        try {
+          const key = '7aery.fila';
+          const fila = JSON.parse(localStorage.getItem(key) ?? '[]');
+          fila.push(entry);
+          localStorage.setItem(key, JSON.stringify(fila));
+        } catch {
+          /* armazenamento indisponível — segue só em memória */
+        }
+        if (formView) formView.hidden = true;
+        if (doneView) doneView.hidden = false;
+      });
+    </script>
+  </body>
+</html>

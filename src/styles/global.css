@@ -9,8 +9,8 @@
   --gold: #f2c988;
   --gold-deep: #c9964f;
   --blue: #9db8ff;
-  --sans: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --sans: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 }
 
 * {
@@ -151,13 +151,13 @@ main {
 }
 
 .hud-stop:hover .mono,
-.hud-stop[data-active="true"] .mono {
+.hud-stop[data-active='true'] .mono {
   opacity: 1;
   transform: none;
   color: var(--dim);
 }
 
-.hud-stop[data-active="true"] i {
+.hud-stop[data-active='true'] i {
   background: var(--gold);
   border-color: var(--gold);
   box-shadow: 0 0 10px rgba(242, 201, 136, 0.8);
@@ -191,6 +191,8 @@ main {
 }
 
 .hero-sun img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -288,6 +290,8 @@ main {
 }
 
 .orb img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -438,6 +442,8 @@ main {
 }
 
 .rede-bg img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   opacity: 0.5;
 }

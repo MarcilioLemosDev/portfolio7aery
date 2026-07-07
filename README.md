@@ -10,31 +10,37 @@ real da NASA (domínio público). Detalhes do produto em
 
 ## Stack
 
-- **Next.js 16** (App Router, 100% estático) + React 19 + TypeScript
-- **GSAP ScrollTrigger** (véus scrub) + **Lenis** (scroll suave)
+- **Astro** (site estático) — mesmo framework do site da MI6
+- **GSAP ScrollTrigger** (véus scrub) + **Lenis** (scroll suave), num
+  único `<script>` empacotado pelo Vite em `src/pages/index.astro`
 - Canvas próprio para o céu estrelado com paralaxe
 - Fontes via Fontsource (Space Grotesk Variable + IBM Plex Mono) — sem
   chamadas externas em build
-- Zero dependências de UI; design system em `app/globals.css`
+- Zero dependências de UI; design system em `src/styles/global.css`
 
 ## Rodar
 
 ```bash
 npm install
-npm run dev      # desenvolvimento
-npm run build    # build de produção
-npm start        # servir o build
+npm run dev        # desenvolvimento (astro dev)
+npm run build      # build de produção → dist/
+npm run preview    # serve o build local
 ```
 
 ## Deploy na Vercel (dogfooding)
 
-1. Acesse [vercel.com/new](https://vercel.com/new) e importe o
-   repositório `MarcilioLemosDev/portfolio7aery` (framework Next.js é
-   detectado sozinho — não precisa configurar nada).
+1. Importe o repositório em [vercel.com/new](https://vercel.com/new).
+   O framework **Astro** é detectado automaticamente (build `astro build`,
+   saída `dist/`).
 2. **Cada push em qualquer branch gera um Preview Deployment com URL
    própria** — é assim que testamos cada versão.
-3. A branch de produção (padrão `main`) publica a URL principal quando
-   receber merge.
+3. A branch de produção (`main`) publica a URL principal quando receber
+   merge.
+
+> Se um deploy antigo der 404, confira em Settings → Build & Deployment
+> se o **Framework Preset** está como **Astro** e o **Output Directory**
+> como `dist` (o import inicial, feito quando o repo estava vazio, pode
+> ter fixado o preset errado).
 
 Sem variáveis de ambiente nesta fase.
 
@@ -52,7 +58,7 @@ npm run fetch:imagery
 ## Estado do piloto
 
 - Formulários de aplicação (fila de espera e rede) **ainda não têm
-  backend**: registram em `localStorage` e mostram o estado de sucesso.
-  Integração real (e-mail/planilha/CRM) é rodada futura.
+  backend**: registram em `localStorage["7aery.fila"]` e mostram o estado
+  de sucesso. Integração real (e-mail/planilha/CRM) é rodada futura.
 - Conteúdo e copy são a primeira versão — feitos para evoluir em
   rodadas de desenvolvimento livre.

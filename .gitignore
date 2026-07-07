@@ -1,17 +1,10 @@
-# dependencies
 node_modules/
-
-# next.js
-.next/
-out/
-*.tsbuildinfo
-
-# misc
-.DS_Store
-npm-debug.log*
-
-# vercel
+dist/
+.astro/
+.env
+.env.local
 .vercel
-
-# env
-.env*
+.DS_Store
+.vscode/
+.idea/
+*.tsbuildinfo

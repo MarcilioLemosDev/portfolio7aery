@@ -1,0 +1,61 @@
+---
+// Diálogo único de aplicação (variantes projeto/rede). O comportamento vive no
+// script central do index; aqui só o esqueleto. Grava em localStorage["7aery.fila"].
+---
+
+<dialog class="apply" data-apply-dialog>
+  <div data-apply-form>
+    <div class="apply-head">
+      <p class="mono" data-apply-kicker>Fila de espera</p>
+      <h3 data-apply-title>Aplicar para um projeto</h3>
+      <span class="apply-preset mono" data-apply-preset hidden></span>
+    </div>
+    <form data-apply-form-el>
+      <div class="field">
+        <label class="mono" for="apply-nome">Nome</label>
+        <input id="apply-nome" name="nome" type="text" required />
+      </div>
+      <div class="field">
+        <label class="mono" for="apply-email">E-mail</label>
+        <input id="apply-email" name="email" type="email" required />
+      </div>
+      <div class="field" data-campo-projeto>
+        <label class="mono" for="apply-msg-projeto">Sobre o projeto</label>
+        <textarea
+          id="apply-msg-projeto"
+          name="mensagem"
+          rows="4"
+          placeholder="O essencial: o que é, para quem e por quê."
+        ></textarea>
+      </div>
+      <div class="field" data-campo-rede hidden>
+        <label class="mono" for="apply-stack">Função / stack</label>
+        <input
+          id="apply-stack"
+          name="stack"
+          type="text"
+          placeholder="ex.: front-end · React / design · UX"
+        />
+      </div>
+      <div class="field" data-campo-rede hidden>
+        <label class="mono" for="apply-msg-rede">Por que você?</label>
+        <textarea id="apply-msg-rede" name="mensagem_rede" rows="4"></textarea>
+      </div>
+      <div class="apply-actions">
+        <button type="submit" class="apply-send">Enviar aplicação</button>
+        <button type="button" class="apply-close" data-apply-close>Fechar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="apply-done" data-apply-done hidden>
+    <p class="mono">Aplicação registrada</p>
+    <p>
+      Você entrou na fila. Se houver encaixe, o retorno chega por e-mail — sem
+      pressa e sem spam.
+    </p>
+    <div class="apply-actions">
+      <button type="button" class="apply-close" data-apply-close>Fechar</button>
+    </div>
+  </div>
+</dialog>

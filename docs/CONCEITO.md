@@ -68,6 +68,9 @@ Proveniência das imagens atuais: `public/space/credits.json`.
 
 - **R1 (feita): piloto** — jornada completa, produtos, rede,
   formulários locais (sem backend), verificação em runtime.
+- **R2 (feita): migração para Astro** — mesma UX/UI, agora no framework
+  do site da MI6 (Astro estático), para o deploy na Vercel se comportar
+  como o do mi6-site (preview por branch, sem os 404 do import inicial).
 - **Dogfooding via Vercel**: cada push = Preview URL; o proprietário
   testa e traz ajustes.
 - **Rodadas livres**: refinamentos guiados pelo uso (copy, backend dos
