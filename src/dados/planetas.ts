@@ -71,10 +71,9 @@ export const planetas: Planeta[] = [
     frase:
       'Grande o bastante para blindar o sistema inteiro. Arquitetura que cresce sem colapsar.',
     img: '/space/jupiter.jpg',
-    alt: 'Retrato de Júpiter com a Grande Mancha Vermelha, pela sonda Cassini (NASA/JPL)',
+    alt: 'Retrato de Júpiter em disco completo com a Grande Mancha Vermelha, pelo Hubble (NASA/ESA, programa OPAL)',
     glow: 'rgba(255, 200, 152, 0.42)',
     shape: 'disc',
-    pos: '50% 56%',
   },
   {
     id: 'saturno',

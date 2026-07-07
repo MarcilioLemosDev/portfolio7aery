@@ -20,7 +20,6 @@ const TARGETS = [
   { slug: "venus",          q: "venus global view magellan",              must: /global view of venus/i },
   { slug: "terra",          q: "apollo 17 view of earth",                 must: /view of the earth seen by the apollo 17/i },
   { slug: "marte",          q: "mars valles marineris",                   must: /tharsis volcanoes and valles marineris/i },
-  { slug: "jupiter",        q: "jupiter portrait cassini",                must: /cassini jupiter portrait/i },
   { slug: "saturno",        q: "saturn natural color global cassini",     must: /greatest saturn portrait|farewell to saturn/i },
   { slug: "urano",          q: "uranus voyager 2",                        must: /uranus as seen by/i },
   { slug: "netuno",         q: "neptune full disk",                       must: /neptune full disk/i },
@@ -90,5 +89,28 @@ for (const t of TARGETS) {
   });
 }
 
+// Fora da NASA Image Library: imagens da ESA/Hubble (CC BY 4.0, crédito no rodapé).
+const ESA = [
+  {
+    slug: "jupiter",
+    url: "https://cdn.esahubble.org/archives/images/screen/heic1914a.jpg",
+    nasa_id: "heic1914a",
+    title: "Jupiter — Hubble OPAL portrait (27 jun 2019)",
+    center: "ESA/Hubble",
+    date_created: "2019-08-08",
+    credit:
+      "NASA, ESA, A. Simon (Goddard Space Flight Center), M.H. Wong (University of California, Berkeley) — CC BY 4.0",
+  },
+];
+
+for (const e of ESA) {
+  const dest = path.join(OUT_DIR, `${e.slug}.jpg`);
+  console.log(`\n── ${e.slug} ← ESA/Hubble ${e.nasa_id}`);
+  curlDownload(e.url, dest);
+  console.log(`   ✓ ${e.title} — ${(statSync(dest).size / 1024).toFixed(0)} KB`);
+  const { url, ...meta } = e;
+  credits.push({ ...meta, source: url });
+}
+
 writeFileSync(path.join(OUT_DIR, "credits.json"), JSON.stringify(credits, null, 2));
-console.log(`\n${credits.length}/${TARGETS.length} imagens salvas em ${OUT_DIR}/`);
+console.log(`\n${credits.length}/${TARGETS.length + ESA.length} imagens salvas em ${OUT_DIR}/`);

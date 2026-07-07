@@ -39,9 +39,18 @@ estático, deploy na Vercel (preview por branch).
 
 ## Convenções
 
+- **Marca: 7Aery** (logo `public/logo.svg`, ciano `#3cc9e9`). O site é
+  acessado pelo Instagram profissional do Marcílio — a marca assina o
+  herói; o nome dele fica no rodapé. Copy **sem primeira pessoa e sem
+  frases de efeito**; captação (aplicação/fila) presente já no herói
 - Imagens novas: sempre pela NASA Image Library ou ESA (crédito no
-  rodapé + `credits.json`); planetas em disco usam crop circular
-  (`shape: "disc"`), panorâmicas como Saturno usam `shape: "wide"`
+  rodapé + `credits.json`); planetas em disco usam crop circular com
+  **máscara radial suave** (`shape: "disc"`; máscara na `img`, não no
+  contêiner, para o glow sobreviver), panorâmicas como Saturno usam
+  `shape: "wide"`. Discos devem ser imagens de disco completo centrado
+  (Júpiter é o Hubble OPAL da ESA por isso)
 - Sem preços no site — produtos abrem aplicação para fila de espera
+- Rolagem calibrada curta: seções de planeta com `min-height: 84svh`,
+  pin do herói em `+=55%` — não realongar sem pedido
 - Branch de trabalho: `claude/marcilio-portfolio-site-87wycd`; deploy é
   dogfooding via Vercel Preview (um por push). Produção na `main`

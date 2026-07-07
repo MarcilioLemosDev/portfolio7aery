@@ -41,11 +41,12 @@
   },
   {
     "slug": "jupiter",
-    "nasa_id": "PIA04866",
-    "title": "Cassini Jupiter Portrait",
-    "center": "JPL",
-    "date_created": "2003-11-13T18:43:42Z",
-    "source": "https://images-assets.nasa.gov/image/PIA04866/PIA04866~large.jpg"
+    "nasa_id": "heic1914a",
+    "title": "Jupiter — Hubble OPAL portrait (27 jun 2019)",
+    "center": "ESA/Hubble",
+    "date_created": "2019-08-08",
+    "source": "https://cdn.esahubble.org/archives/images/screen/heic1914a.jpg",
+    "credit": "NASA, ESA, A. Simon (Goddard Space Flight Center), M.H. Wong (University of California, Berkeley) — CC BY 4.0"
   },
   {
     "slug": "saturno",

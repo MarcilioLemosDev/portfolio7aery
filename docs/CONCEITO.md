@@ -1,4 +1,17 @@
-# Conceito — Portfólio Marcílio Lemos
+# Conceito — 7Aery (portfólio de Marcílio Lemos)
+
+## A marca
+
+O projeto chama-se **7Aery** (logo em `public/logo.svg`, ciano
+`#3cc9e9`). O site é acessado a partir do perfil profissional do
+Marcílio no Instagram — quem chega já sabe quem ele é. Por isso:
+
+- A **marca assina o herói**; o nome do Marcílio fica no rodapé.
+- Copy **sem primeira pessoa e sem frases de efeito**. O visitante é
+  quem faz a travessia — isso se mostra, não se diz.
+- A **captação aparece já no herói**: resumo direto do modelo
+  (aplicação + fila de espera) e CTA imediato. O scroll aprofunda quem
+  quiser ir além.
 
 ## A ideia central: remoção de véus
 
@@ -71,6 +84,10 @@ Proveniência das imagens atuais: `public/space/credits.json`.
 - **R2 (feita): migração para Astro** — mesma UX/UI, agora no framework
   do site da MI6 (Astro estático), para o deploy na Vercel se comportar
   como o do mi6-site (preview por branch, sem os 404 do import inicial).
+- **R3 (feita): marca e calibragem** — identidade 7Aery no herói (logo +
+  captação imediata), copy sem primeira pessoa, recorte dos planetas com
+  máscara suave (Júpiter trocado pelo disco completo do Hubble/ESA) e
+  rolagem ~20% mais curta.
 - **Dogfooding via Vercel**: cada push = Preview URL; o proprietário
   testa e traz ajustes.
 - **Rodadas livres**: refinamentos guiados pelo uso (copy, backend dos
