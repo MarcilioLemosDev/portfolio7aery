@@ -121,6 +121,6 @@ export const paradas = [
   { id: 'saturno', label: 'SAT' },
   { id: 'urano', label: 'URA' },
   { id: 'netuno', label: 'NET' },
-  { id: 'orbitas', label: 'ÓRB' },
+  { id: 'orbitas', label: 'PRJ' },
   { id: 'rede', label: '∞' },
 ];

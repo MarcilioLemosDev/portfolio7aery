@@ -63,6 +63,8 @@ const descricao =
       import Lenis from 'lenis';
 
       gsap.registerPlugin(ScrollTrigger);
+      // Barra de endereço do celular colapsa/expande sem re-medir os pins.
+      ScrollTrigger.config({ ignoreMobileResize: true });
 
       const motionOk = window.matchMedia(
         '(prefers-reduced-motion: no-preference)'
@@ -176,22 +178,48 @@ const descricao =
           .to('.hero-hint', { opacity: 0, duration: 0.25 }, 0.05)
           .to('.hero-copy', { y: -36, opacity: 0.9, ease: 'none' }, 0.55);
 
-        gsap.utils.toArray<HTMLElement>('.planet').forEach((sec) => {
+        // Entrada orbital: o planeta chega da lateral (lados alternados),
+        // varrendo um arco e girando, enquanto o véu de escuridão se ergue.
+        gsap.utils.toArray<HTMLElement>('.planet').forEach((sec, i) => {
+          const orb = sec.querySelector<HTMLElement>('.orb');
+          if (!orb) return;
+          const wide = orb.classList.contains('wide');
+          const dir = i % 2 === 0 ? -1 : 1;
           gsap
             .timeline({
-              scrollTrigger: { trigger: sec, start: 'top 85%', end: 'top 35%', scrub: 1 },
+              scrollTrigger: { trigger: sec, start: 'top 92%', end: 'top 30%', scrub: 1 },
             })
             .fromTo(
-              sec.querySelector('.orb'),
-              { opacity: 0, scale: 1.13, filter: 'brightness(0.08)' },
-              { opacity: 1, scale: 1, filter: 'brightness(1)', ease: 'none' },
+              orb,
+              {
+                x: `${dir * (wide ? 34 : 46)}vw`,
+                rotation: dir * (wide ? 9 : 75),
+                scale: wide ? 0.9 : 0.66,
+                opacity: 0,
+                filter: 'brightness(0.05)',
+              },
+              {
+                x: 0,
+                rotation: 0,
+                scale: 1,
+                opacity: 1,
+                filter: 'brightness(1)',
+                ease: 'power1.out',
+                duration: 1,
+              },
+              0
+            )
+            .fromTo(
+              orb,
+              { y: wide ? '4vh' : '14vh' },
+              { y: 0, ease: 'sine.in', duration: 1 },
               0
             )
             .fromTo(
               sec.querySelectorAll('.p-copy > *'),
-              { y: 36, opacity: 0 },
-              { y: 0, opacity: 1, stagger: 0.09, ease: 'power2.out' },
-              0.15
+              { x: -dir * 38, opacity: 0 },
+              { x: 0, opacity: 1, stagger: 0.08, ease: 'power2.out', duration: 0.5 },
+              0.45
             );
         });
 

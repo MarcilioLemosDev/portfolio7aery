@@ -88,6 +88,11 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   captação imediata), copy sem primeira pessoa, recorte dos planetas com
   máscara suave (Júpiter trocado pelo disco completo do Hubble/ESA) e
   rolagem ~20% mais curta.
+- **R4 (feita): órbita e sobriedade** — planetas entram em varredura
+  orbital lateral (lados alternados, arco + rotação + véu de brilho),
+  recorte ainda mais dissolvido, Sol do herói corrigido no mobile (vmax)
+  e produtos sem metáfora espacial (referência de tom: lerian.studio —
+  nomes funcionais, descrição objetiva, escassez mantida).
 - **Dogfooding via Vercel**: cada push = Preview URL; o proprietário
   testa e traz ajustes.
 - **Rodadas livres**: refinamentos guiados pelo uso (copy, backend dos

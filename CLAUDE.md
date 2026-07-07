@@ -28,6 +28,13 @@ estático, deploy na Vercel (preview por branch).
   o diálogo de aplicação. As timelines só são criadas quando
   `matchMedia('(prefers-reduced-motion: no-preference)')` — o estado
   padrão do CSS é o estado final (site legível sem JS/animação)
+- **Entrada orbital dos planetas**: cada seção `.planet` entra da
+  lateral (lados alternados por índice), com arco (x ease `power1.out`
+  + y `sine.in`), rotação e véu de brilho — janela `top 92%`→`top 30%`,
+  ease quase linear para a varredura acontecer dentro do viewport (easing
+  agressivo esconde o efeito abaixo da dobra). Texto entra do lado oposto
+- O Sol do herói usa `vmax` (não `vmin`) — em retrato o disco precisa
+  transbordar a tela; scrim reforçado via media query ≤700px
 - Diálogo único `Aplicacao.astro` (variantes `projeto`/`rede`, abertas
   por `[data-aplicar]`), grava em `localStorage["7aery.fila"]`; campos da
   variante inativa ficam `disabled` (fora do FormData); **sem backend**
