@@ -86,6 +86,14 @@ estático, deploy na Vercel (preview por branch).
   contêiner, para o glow sobreviver), panorâmicas como Saturno usam
   `shape: "wide"`. Discos devem ser imagens de disco completo centrado
   (Júpiter é o Hubble OPAL da ESA por isso)
+- **Cada foto-fonte enquadra o disco diferente** (medido em
+  `scratchpad/medir-discos.mjs`: Mercúrio/Vênus/Urano preenchem ~90% do
+  quadro, Terra 66,7%, Netuno 56,6%): a máscara padrão (`--m1`..`--m4`
+  no CSS, com fallback) só serve quem preenche o quadro; planetas com
+  mais margem própria sobrescrevem via `maskStops` em `planetas.ts`
+  (Terra, Netuno), senão a margem preta *da foto* vaza como contorno
+  duro. Saturno (`wide`) teve os stops alargados pelo mesmo motivo —
+  o conteúdo real (anel) ia além do que a máscara antiga revelava
 - Sem preços no site — produtos abrem aplicação para fila de espera
 - Rolagem calibrada curta: seções de planeta com `min-height: 84svh`,
   pin do herói em `+=55%` — não realongar sem pedido

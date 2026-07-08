@@ -559,10 +559,14 @@ main {
 }
 
 /* Recorte suave: a máscara fica na imagem (não no contêiner) para o brilho
-   do box-shadow sobreviver. O degradê longo dissolve o limbo do planeta no
-   fundo — sem linha de recorte aparente. As paradas escalam com --reveal:
-   em 0 a máscara colapsa a um ponto (planeta apagado, já na posição final);
-   em 1 chega no recorte calibrado abaixo. */
+   do box-shadow sobreviver. As quatro paradas (--m1..--m4, % do raio) têm
+   fallback para o enquadramento "cheio" (Mercúrio/Vênus/Urano preenchem
+   ~90% do quadro); planetas com mais margem própria na foto (Terra,
+   Netuno) sobrescrevem via Planeta.astro — ver maskStops em planetas.ts.
+   Sem isso, a margem preta da FOTO (não do site) fica exposta em opacidade
+   alta antes do fade, aparecendo como um contorno duro. As paradas também
+   escalam com --reveal: em 0 a máscara colapsa a um ponto (planeta
+   apagado, já na posição final); em 1 chega no recorte calibrado. */
 .orb img {
   width: 100%;
   height: 100%;
@@ -570,17 +574,17 @@ main {
   border-radius: 50%;
   -webkit-mask-image: radial-gradient(
     circle closest-side,
-    #000 calc(var(--reveal) * 58%),
-    rgba(0, 0, 0, 0.82) calc(var(--reveal) * 76%),
-    rgba(0, 0, 0, 0.38) calc(var(--reveal) * 90%),
-    transparent calc(var(--reveal) * 99%)
+    #000 calc(var(--reveal) * var(--m1, 58%)),
+    rgba(0, 0, 0, 0.82) calc(var(--reveal) * var(--m2, 76%)),
+    rgba(0, 0, 0, 0.38) calc(var(--reveal) * var(--m3, 90%)),
+    transparent calc(var(--reveal) * var(--m4, 99%))
   );
   mask-image: radial-gradient(
     circle closest-side,
-    #000 calc(var(--reveal) * 58%),
-    rgba(0, 0, 0, 0.82) calc(var(--reveal) * 76%),
-    rgba(0, 0, 0, 0.38) calc(var(--reveal) * 90%),
-    transparent calc(var(--reveal) * 99%)
+    #000 calc(var(--reveal) * var(--m1, 58%)),
+    rgba(0, 0, 0, 0.82) calc(var(--reveal) * var(--m2, 76%)),
+    rgba(0, 0, 0, 0.38) calc(var(--reveal) * var(--m3, 90%)),
+    transparent calc(var(--reveal) * var(--m4, 99%))
   );
 }
 
@@ -591,20 +595,23 @@ main {
   box-shadow: 0 0 140px -40px var(--glow, rgba(200, 210, 255, 0.4));
 }
 
+/* Saturno (único "wide" hoje): medido em scratchpad/medir-discos.mjs, o
+   anel real chega a 62,8% do raio vertical — a máscara antiga começava a
+   apagar em 52% e cortava anel de verdade. Paradas mais largas evitam isso. */
 .orb.wide img {
   border-radius: 0.9rem;
   -webkit-mask-image: radial-gradient(
     ellipse closest-side,
-    #000 calc(var(--reveal) * 52%),
-    rgba(0, 0, 0, 0.8) calc(var(--reveal) * 72%),
-    rgba(0, 0, 0, 0.32) calc(var(--reveal) * 88%),
+    #000 calc(var(--reveal) * 66%),
+    rgba(0, 0, 0, 0.8) calc(var(--reveal) * 82%),
+    rgba(0, 0, 0, 0.32) calc(var(--reveal) * 93%),
     transparent calc(var(--reveal) * 99%)
   );
   mask-image: radial-gradient(
     ellipse closest-side,
-    #000 calc(var(--reveal) * 52%),
-    rgba(0, 0, 0, 0.8) calc(var(--reveal) * 72%),
-    rgba(0, 0, 0, 0.32) calc(var(--reveal) * 88%),
+    #000 calc(var(--reveal) * 66%),
+    rgba(0, 0, 0, 0.8) calc(var(--reveal) * 82%),
+    rgba(0, 0, 0, 0.32) calc(var(--reveal) * 93%),
     transparent calc(var(--reveal) * 99%)
   );
 }

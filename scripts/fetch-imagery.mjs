@@ -23,7 +23,7 @@ const TARGETS = [
   { slug: "saturno",        q: "saturn natural color global cassini",     must: /greatest saturn portrait|farewell to saturn/i },
   { slug: "urano",          q: "uranus voyager 2",                        must: /uranus as seen by/i },
   { slug: "netuno",         q: "neptune full disk",                       must: /neptune full disk/i },
-  { slug: "campo-profundo", q: "webb first deep field",                   must: /first full-color|deep field/i },
+  { slug: "via-lactea",     q: "milky way galactic center spitzer hubble chandra", must: /great observatories.*milky way/i },
 ];
 
 const curlText = (url) =>

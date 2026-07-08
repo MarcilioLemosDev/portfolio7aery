@@ -14,9 +14,16 @@ const estiloImg = [
 ]
   .filter(Boolean)
   .join(';');
+const [m1, m2, m3, m4] = planeta.maskStops ?? [];
+const estiloSecao = [
+  `--glow:${planeta.glow}`,
+  planeta.maskStops ? `--m1:${m1}%;--m2:${m2}%;--m3:${m3}%;--m4:${m4}%` : null,
+]
+  .filter(Boolean)
+  .join(';');
 ---
 
-<section id={planeta.id} class="planet" style={`--glow:${planeta.glow}`}>
+<section id={planeta.id} class="planet" style={estiloSecao}>
   <div class={planeta.shape === 'wide' ? 'orb wide' : 'orb'}>
     <img
       src={planeta.img}

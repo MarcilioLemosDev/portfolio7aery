@@ -15,6 +15,14 @@ export type Planeta = {
   shape: 'disc' | 'wide';
   pos?: string;
   zoom?: number;
+  // Paradas da máscara radial (% do raio, na ordem opaco→transparente).
+  // Cada imagem-fonte enquadra o disco de um jeito diferente (medido em
+  // scratchpad/medir-discos.mjs: Mercúrio/Vênus/Urano preenchem ~90% do
+  // quadro, Terra só 66,7%, Netuno só 56,6%) — sem isso, a margem preta
+  // da própria foto (não do site) fica exposta em opacidade alta antes
+  // do fade começar, aparecendo como um contorno duro. Default (a maioria
+  // dos planetas) fica implícito no CSS; só sobrescreve quem precisa.
+  maskStops?: [number, number, number, number];
 };
 
 export const planetas: Planeta[] = [
@@ -53,6 +61,7 @@ export const planetas: Planeta[] = [
     alt: 'A Terra vista pela tripulação da Apollo 17, a Blue Marble (NASA)',
     glow: 'rgba(122, 172, 255, 0.5)',
     shape: 'disc',
+    maskStops: [52, 64, 78, 90],
   },
   {
     id: 'veu-04',
@@ -110,6 +119,7 @@ export const planetas: Planeta[] = [
     glow: 'rgba(112, 152, 255, 0.5)',
     shape: 'disc',
     pos: '48% 47%',
+    maskStops: [42, 54, 68, 82],
   },
 ];
 

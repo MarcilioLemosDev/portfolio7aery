@@ -78,7 +78,7 @@ Imagens em `public/space/`, todas de fontes oficiais:
 - **NASA Image and Video Library** (domínio público) — Sol (SDO),
   Mercúrio (MESSENGER), Vênus (Magellan/Pioneer), Terra (Apollo 17),
   Marte (JPL/MSSS), Saturno (Cassini), Urano e Netuno (Voyager 2),
-  Deep Field (Hubble XDF).
+  centro da Via Láctea (Spitzer/Hubble/Chandra, "Great Observatories").
 - **ESA/Hubble** (CC BY 4.0, crédito no rodapé) — Júpiter (retrato
   OPAL 2019 do Hubble).
 

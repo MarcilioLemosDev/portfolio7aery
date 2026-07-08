@@ -156,6 +156,19 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   design e produto; "vagas limitadas · detalhes na conversa"). O
   conceito dos véus segue vivo como estrutura visual — só não é mais
   nomeado.
+- **R11 (feita): recorte calibrado por imagem + Via Láctea** — medido
+  com um script (`scratchpad/medir-discos.mjs`, amostra pixels reais)
+  quanto cada foto-fonte preenche o quadro: Mercúrio/Vênus/Urano ~90%,
+  Terra 66,7%, Netuno 56,6%. A máscara compartilhada expunha a margem
+  preta *da própria foto* como contorno duro nos planetas menores —
+  Terra e Netuno ganharam `maskStops` calibrados em `planetas.ts`;
+  Saturno (wide) teve os stops alargados porque a máscara antiga
+  cortava anel de verdade (conteúdo real chega a 62,8% vertical, a
+  máscara começava a apagar em 52%). Fundo da seção "Trabalhe conosco"
+  trocado do Hubble Deep Field (esparso, não combinava mais com a copy
+  aterrada pós-R8) pela Via Láctea — composição Spitzer/Hubble/Chandra
+  do centro galático (NASA, domínio público), arquivo renomeado de
+  `campo-profundo.jpg` para `via-lactea.jpg`.
 - **R10 (feita): revelação em vez de chegada** — a entrada orbital (R4:
   planeta voando da lateral com giro) foi substituída pelo mecanismo
   original do herói: o planeta já está na posição final, e o scroll só
