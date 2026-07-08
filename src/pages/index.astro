@@ -351,11 +351,11 @@ const descricao =
         doneView.hidden = true;
         formEl.reset();
         const projeto = v === 'projeto';
-        if (kicker) kicker.textContent = projeto ? 'Fila de espera' : 'Construir a rede';
+        if (kicker) kicker.textContent = projeto ? 'Fila de espera' : 'Trabalhe conosco';
         if (titleEl)
           titleEl.textContent = projeto
             ? 'Aplicar para um projeto'
-            : 'Aplicar para construir a primeira rede social for tech';
+            : 'Enviar aplicação para o time';
         if (presetEl) {
           presetEl.hidden = !preset;
           presetEl.textContent = preset ? `Escopo: ${preset}` : '';

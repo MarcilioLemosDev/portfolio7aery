@@ -859,6 +859,10 @@ main {
   gap: 0.45rem;
 }
 
+.field[hidden] {
+  display: none;
+}
+
 .field .mono {
   font-size: 0.56rem;
   color: var(--dim);
@@ -928,6 +932,11 @@ main {
   display: grid;
   gap: 1rem;
   justify-items: start;
+}
+
+.apply-done[hidden],
+[data-apply-form][hidden] {
+  display: none;
 }
 
 .apply-done .mono {

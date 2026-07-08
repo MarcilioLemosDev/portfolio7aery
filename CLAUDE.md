@@ -32,8 +32,13 @@ estático, deploy na Vercel (preview por branch).
   Diamante só aparece como alusão (linha `.processo` em Produtos)
 - Produtos: 3 escopos (Site / Site + App / Site + App + Rede Social) +
   card Plus de largura total (`.tier-plus`): "Modelo preditivo de
-  venda". Chip do diálogo usa "Escopo:"; a seção da rede social é limpa
-  e direta (sem misticismo)
+  venda". Chip do diálogo usa "Escopo:"; a seção "Trabalhe conosco"
+  (id `#rede`) é uma sessão simples de recrutamento — engenharia,
+  design e produto
+- Diálogo `Aplicacao.astro`: `.field`, `.apply-done` e
+  `[data-apply-form]` **precisam** de regras `[hidden] { display:none }`
+  no CSS porque o base é `display: grid`. Sem isso, o diálogo vaza
+  todos os campos e o estado done simultaneamente (bug caçado na R8)
 - Appbar (`Hud.astro`): marca à esquerda; à direita links âncora
   (`data-stop`), profundidade % e CTA `Aplicar` (`data-aplicar`);
   ganha fundo blur com a classe `.rolou` após 60px de rolagem

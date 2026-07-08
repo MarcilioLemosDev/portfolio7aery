@@ -1,64 +1,110 @@
 # portfolio7aery
 
-Portfólio-narrativa de **Marcílio Lemos — Desenvolvedor de Software · Brasil**.
+Site institucional da **7Aery** — sites, apps e produtos digitais sob
+aplicação, projeto de **Marcílio Lemos** (Desenvolvedor de Software ·
+Brasil).
 
-O conceito é **remoção de véus**: cada rolagem revela uma camada do
-sistema solar — do Sol a Netuno — até sair do sistema e encontrar a
-chamada para a primeira rede social *for tech* do mundo. Iconografia
-real da NASA (domínio público). Detalhes do produto em
+O visitante chega pelo Instagram profissional do Marcílio e encontra
+uma página única em Astro estático, com iconografia oficial da NASA/ESA
+e narrativa em camadas (removidas por scroll) construída em cima do
+conceito: **a loja do empresário agora é um funil online**. Detalhes de
+produto, conceito e método de desenvolvimento em
 [`docs/CONCEITO.md`](docs/CONCEITO.md).
 
 ## Stack
 
-- **Astro** (site estático) — mesmo framework do site da MI6
-- **GSAP ScrollTrigger** (véus scrub) + **Lenis** (scroll suave), num
-  único `<script>` empacotado pelo Vite em `src/pages/index.astro`
-- Canvas próprio para o céu estrelado com paralaxe
-- Fontes via Fontsource (Space Grotesk Variable + IBM Plex Mono) — sem
-  chamadas externas em build
-- Zero dependências de UI; design system em `src/styles/global.css`
+- **Astro 7** (`output: 'static'`), Vite bundler, `@astrojs/sitemap`
+- **GSAP ScrollTrigger** (véus e entrada orbital) + **Lenis** (scroll
+  suave, dirigido pelo ticker do GSAP), num único `<script>` central
+  em `src/pages/index.astro`
+- **Canvas próprio** para o céu estrelado com paralaxe
+- Fontes via Fontsource (Space Grotesk Variable + IBM Plex Mono) —
+  empacotadas no build, zero chamadas externas em runtime
+- **Zero dependências de UI**; design system em `src/styles/global.css`
+- `playwright-core` como devDependency (verificação em runtime usa o
+  Chromium do ambiente Claude Code em `/opt/pw-browsers/chromium`)
+
+## Arquitetura resumida
+
+```
+src/
+├── pages/index.astro          # página única (head inline + script central)
+├── components/
+│   ├── Heroi.astro            # Sol, pinned + véu; CTA "Aplicar para um projeto"
+│   ├── ProvaSocial.astro      # posição pós-Sol; logo da MI6 → mi6consorcio.com.br
+│   ├── Planeta.astro          # 8 seções (ids veu-01…veu-08)
+│   ├── Produtos.astro         # 3 escopos + card Plus (modelo preditivo)
+│   ├── Rede.astro             # Trabalhe conosco
+│   ├── Rodape.astro
+│   ├── Hud.astro              # appbar (Projetos, Time, Aplicar) + trilho lateral
+│   └── Aplicacao.astro        # <dialog> com variantes projeto/time
+├── dados/planetas.ts          # dados das 8 seções + paradas do trilho
+└── styles/global.css          # tokens e todo o CSS
+public/
+├── logo.svg, favicon.svg      # marca 7Aery (ciano #3cc9e9)
+├── logo-mi6.png               # prova social (do repo mi6-site)
+└── space/*.jpg + credits.json # iconografia NASA/ESA, com proveniência
+```
 
 ## Rodar
 
 ```bash
 npm install
-npm run dev        # desenvolvimento (astro dev)
-npm run build      # build de produção → dist/
-npm run preview    # serve o build local
+npm run dev            # dev server (astro dev)
+npm run build          # build de produção → dist/
+npm run preview        # serve o build local (astro preview)
+npm run fetch:imagery  # rebaixa imagens da NASA/ESA (curl via proxy)
 ```
 
-## Deploy na Vercel (dogfooding)
+## Deploy — Vercel
 
-1. Importe o repositório em [vercel.com/new](https://vercel.com/new).
-   O framework **Astro** é detectado automaticamente (build `astro build`,
-   saída `dist/`).
-2. **Cada push em qualquer branch gera um Preview Deployment com URL
-   própria** — é assim que testamos cada versão.
-3. A branch de produção (`main`) publica a URL principal quando receber
-   merge.
+Cada push em qualquer branch gera um Preview Deployment. A produção
+publica a partir de `main`.
 
-> Se um deploy antigo der 404, confira em Settings → Build & Deployment
-> se o **Framework Preset** está como **Astro** e o **Output Directory**
-> como `dist` (o import inicial, feito quando o repo estava vazio, pode
-> ter fixado o preset errado).
+Framework detectado: **Astro**. Diretório de saída: **`dist`**. Sem
+variáveis de ambiente por enquanto (os formulários registram em
+`localStorage["7aery.fila"]` — integração de backend é rodada futura).
 
-Sem variáveis de ambiente nesta fase.
+`vercel.json` adiciona headers de segurança e cache imutável para
+`/space/*`.
 
-## Imagens
+## Iconografia
 
-As imagens vivem em `public/space/` e vêm da
-[NASA Image and Video Library](https://images.nasa.gov) (domínio
-público; proveniência em `public/space/credits.json`). Para rebaixar ou
-trocar a curadoria:
+Imagens em `public/space/`, todas de fontes oficiais:
 
-```bash
-npm run fetch:imagery
-```
+- **NASA Image and Video Library** (domínio público) — Sol (SDO),
+  Mercúrio (MESSENGER), Vênus (Magellan/Pioneer), Terra (Apollo 17),
+  Marte (JPL/MSSS), Saturno (Cassini), Urano e Netuno (Voyager 2),
+  Deep Field (Hubble XDF).
+- **ESA/Hubble** (CC BY 4.0, crédito no rodapé) — Júpiter (retrato
+  OPAL 2019 do Hubble).
 
-## Estado do piloto
+Proveniência completa em `public/space/credits.json`; o script
+`scripts/fetch-imagery.mjs` refaz a curadoria (usa `curl`, respeita o
+proxy do ambiente).
 
-- Formulários de aplicação (fila de espera e rede) **ainda não têm
-  backend**: registram em `localStorage["7aery.fila"]` e mostram o estado
-  de sucesso. Integração real (e-mail/planilha/CRM) é rodada futura.
-- Conteúdo e copy são a primeira versão — feitos para evoluir em
-  rodadas de desenvolvimento livre.
+## Verificação em runtime
+
+O projeto vem com uma skill do Claude Code em `.claude/skills/verify/`
+que builda, sobe o `astro preview` na porta 3100 e dirige o site com
+`playwright-core` + Chromium local — capturando screenshots e erros de
+console. Rode via `/verify` numa sessão Claude Code, ou siga o
+`SKILL.md` manualmente.
+
+## Estado atual do produto
+
+- **Formulários registram em `localStorage`** ("7aery.fila") e mostram
+  o estado de sucesso. Integração real (e-mail / planilha / CRM) fica
+  para rodada futura.
+- **Sem preços públicos.** Todo produto abre o mesmo diálogo de
+  aplicação (variantes `projeto` e `time`, com chip `Escopo:` quando
+  vem de um card específico).
+- **Conteúdo em pt-BR.**
+
+## Método
+
+Este repositório é desenvolvido pelo **Triplo Diamante** do próprio
+Marcílio: (1) entender e organizar, (2) desenvolvimento livre em
+rodadas — várias versões sem conceito de "errado", com dogfooding via
+Vercel Preview a cada push — até chegar à (3) versão final e deploy em
+produção. O log das rodadas fica em `docs/CONCEITO.md`.

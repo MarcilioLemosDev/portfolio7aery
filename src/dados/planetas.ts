@@ -101,10 +101,10 @@ export const planetas: Planeta[] = [
   },
   {
     id: 'veu-08',
-    tema: 'Profundidade',
-    titulo: 'O raro não fica na superfície.',
+    tema: 'Time',
+    titulo: 'Feito por gente que se importa.',
     frase:
-      'Trabalho profundo, feito com tempo — o tipo de resultado que não sai de linha de produção.',
+      'Um time pequeno, contratado a dedo. É por isso que a agenda é curta — e por isso que a régua se mantém.',
     img: '/space/netuno.jpg',
     alt: 'Netuno em disco completo, registrado pela Voyager 2 (NASA/JPL)',
     glow: 'rgba(112, 152, 255, 0.5)',
@@ -124,5 +124,5 @@ export const paradas = [
   { id: 'veu-07', label: '07' },
   { id: 'veu-08', label: '08' },
   { id: 'orbitas', label: 'PRJ' },
-  { id: 'rede', label: 'REDE' },
+  { id: 'rede', label: 'TIME' },
 ];

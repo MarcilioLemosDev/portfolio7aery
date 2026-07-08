@@ -156,6 +156,14 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   design e produto; "vagas limitadas · detalhes na conversa"). O
   conceito dos véus segue vivo como estrutura visual — só não é mais
   nomeado.
+- **R8 (feita): Trabalhe conosco e diálogo corrigido** — a seção da
+  "rede" vira uma sessão simples de trabalhe conosco: "O time cresce
+  por aplicação · engenharia, design e produto"; parada do trilho vira
+  TIME, link da appbar vira Time. Ajuste da copy da seção 08 (agora
+  fala do time, não de "profundidade além do sistema"). Corrigido um
+  bug do CSS que fazia o diálogo vazar todos os campos e o estado
+  "done" ao mesmo tempo: `.field`, `.apply-done` e `[data-apply-form]`
+  agora respeitam `[hidden]` explicitamente.
 - **Dogfooding via Vercel**: cada push = Preview URL; o proprietário
   testa e traz ajustes.
 - **Rodadas livres**: refinamentos guiados pelo uso (copy, backend dos
