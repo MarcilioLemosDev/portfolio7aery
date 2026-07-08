@@ -183,49 +183,41 @@ const descricao =
           .to('.hero-hint', { opacity: 0, duration: 0.25 }, 0.05)
           .to('.hero-copy', { y: -36, opacity: 0.9, ease: 'none' }, 0.55);
 
-        // Entrada orbital: o planeta chega da lateral (lados alternados),
-        // varrendo um arco e girando, enquanto o véu de escuridão se ergue.
-        gsap.utils.toArray<HTMLElement>('.planet').forEach((sec, i) => {
+        // Revelação: o planeta já está na posição final — o scroll clareia
+        // o brilho e expande a máscara (o véu abre de um núcleo apagado até
+        // o recorte final). O texto só recebe um fade, sem deslocamento.
+        gsap.utils.toArray<HTMLElement>('.planet').forEach((sec) => {
           const orb = sec.querySelector<HTMLElement>('.orb');
           if (!orb) return;
-          const wide = orb.classList.contains('wide');
-          const dir = i % 2 === 0 ? -1 : 1;
           gsap
             .timeline({
-              scrollTrigger: { trigger: sec, start: 'top 92%', end: 'top 30%', scrub: 1 },
+              scrollTrigger: { trigger: sec, start: 'top 90%', end: 'top 32%', scrub: 1 },
             })
             .fromTo(
               orb,
-              {
-                x: `${dir * (wide ? 34 : 46)}vw`,
-                rotation: dir * (wide ? 9 : 75),
-                scale: wide ? 0.9 : 0.66,
-                opacity: 0,
-                filter: 'brightness(0.05)',
-              },
-              {
-                x: 0,
-                rotation: 0,
-                scale: 1,
-                opacity: 1,
-                filter: 'brightness(1)',
-                ease: 'power1.out',
-                duration: 1,
-              },
-              0
-            )
-            .fromTo(
-              orb,
-              { y: wide ? '4vh' : '14vh' },
-              { y: 0, ease: 'sine.in', duration: 1 },
+              { '--reveal': 0, filter: 'brightness(0.15)' },
+              { '--reveal': 1, filter: 'brightness(1)', ease: 'power1.out', duration: 1 },
               0
             )
             .fromTo(
               sec.querySelectorAll('.p-copy > *'),
-              { x: -dir * 38, opacity: 0 },
-              { x: 0, opacity: 1, stagger: 0.08, ease: 'power2.out', duration: 0.5 },
-              0.45
+              { opacity: 0 },
+              { opacity: 1, stagger: 0.09, ease: 'power1.out', duration: 0.6 },
+              0.15
             );
+        });
+
+        // Flutuação ambiente: o texto boia devagar, independente do scroll —
+        // os planetas ficam parados (já estão lá); só o texto se move.
+        gsap.utils.toArray<HTMLElement>('.planet .p-copy').forEach((copy, i) => {
+          gsap.to(copy, {
+            y: -7,
+            duration: 3.4 + (i % 3) * 0.5,
+            delay: i * 0.3,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+          });
         });
 
         gsap

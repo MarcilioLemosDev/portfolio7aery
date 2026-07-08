@@ -156,6 +156,17 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   design e produto; "vagas limitadas · detalhes na conversa"). O
   conceito dos véus segue vivo como estrutura visual — só não é mais
   nomeado.
+- **R10 (feita): revelação em vez de chegada** — a entrada orbital (R4:
+  planeta voando da lateral com giro) foi substituída pelo mecanismo
+  original do herói: o planeta já está na posição final, e o scroll só
+  clareia o brilho e expande a máscara radial (`--reveal` 0→1) — o véu
+  abre de um núcleo apagado até o recorte calibrado, sem nenhum
+  deslocamento. O texto (`.p-copy`) ganhou fade puro no scroll-trigger
+  e uma flutuação ambiente contínua e independente do scroll (loop
+  `sine.inOut`, poucos pixels, dessincronizada por seção). Motivação do
+  cliente: "os planetas parecem já estar ali... e se apresentam
+  conforme a rolagem" — a métafora vira revelação, não chegada,
+  coerente com o conceito fundador dos véus.
 - **R9 (feita): seletor de idioma (estrutura)** — Astro i18n routing
   configurado (`pt` padrão sem prefixo, `en` e `fr` com
   `fallbackType: 'rewrite'`): `/en/` e `/fr/` já respondem 200 e

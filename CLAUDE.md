@@ -54,11 +54,15 @@ estático, deploy na Vercel (preview por branch).
   o diálogo de aplicação. As timelines só são criadas quando
   `matchMedia('(prefers-reduced-motion: no-preference)')` — o estado
   padrão do CSS é o estado final (site legível sem JS/animação)
-- **Entrada orbital dos planetas**: cada seção `.planet` entra da
-  lateral (lados alternados por índice), com arco (x ease `power1.out`
-  + y `sine.in`), rotação e véu de brilho — janela `top 92%`→`top 30%`,
-  ease quase linear para a varredura acontecer dentro do viewport (easing
-  agressivo esconde o efeito abaixo da dobra). Texto entra do lado oposto
+- **Revelação dos planetas**: cada `.orb` já nasce na posição final (sem
+  translação/rotação); o scroll anima a custom property `--reveal`
+  (0→1, usada em `calc()` nas paradas do `mask-image`) e o `brightness`
+  do filter — o planeta "acende" e a máscara abre de um núcleo apagado
+  até o recorte final, mesma lógica do véu do herói. Fallback CSS
+  `--reveal: 1` (estado final sem JS/reduced-motion). O texto (`.p-copy`)
+  só recebe fade no scroll-trigger; a flutuação (`y` ± 7px, loop
+  `sine.inOut`, `yoyo`, `repeat: -1`) roda independente do scroll,
+  dessincronizada por seção via `delay`/`duration` variáveis por índice
 - O Sol do herói usa `vmax` (não `vmin`) — em retrato o disco precisa
   transbordar a tela; scrim reforçado via media query ≤700px
 - Diálogo único `Aplicacao.astro` (variantes `projeto`/`rede`, abertas

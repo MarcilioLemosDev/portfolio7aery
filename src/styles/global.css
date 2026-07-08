@@ -540,9 +540,9 @@ main {
   gap: 2.2rem;
   padding: 4.5rem 1.5rem;
   text-align: center;
-  /* Contém o giro orbital (translateX até 46vw) dentro da seção — se este
-     `clip` cair, a página ganha scroll horizontal e o pinch-out expõe faixas
-     em branco nas laterais. */
+  /* Rede de segurança contra overflow horizontal (a flutuação do texto e a
+     revelação do planeta são só opacity/mask/brightness, mas o clip
+     continua barato e evita reaparecer o bug do pinch-out no mobile). */
   overflow-x: clip;
 }
 
@@ -552,11 +552,17 @@ main {
   aspect-ratio: 1;
   border-radius: 50%;
   box-shadow: 0 0 120px -32px var(--glow, rgba(200, 210, 255, 0.4));
+  /* Controla o raio da revelação (0 = apagado, 1 = recorte final). O
+     padrão é 1: sem JS ou com prefers-reduced-motion, o planeta já
+     nasce revelado — o estado final do CSS é sempre o estado de repouso. */
+  --reveal: 1;
 }
 
 /* Recorte suave: a máscara fica na imagem (não no contêiner) para o brilho
    do box-shadow sobreviver. O degradê longo dissolve o limbo do planeta no
-   fundo — sem linha de recorte aparente. */
+   fundo — sem linha de recorte aparente. As paradas escalam com --reveal:
+   em 0 a máscara colapsa a um ponto (planeta apagado, já na posição final);
+   em 1 chega no recorte calibrado abaixo. */
 .orb img {
   width: 100%;
   height: 100%;
@@ -564,17 +570,17 @@ main {
   border-radius: 50%;
   -webkit-mask-image: radial-gradient(
     circle closest-side,
-    #000 58%,
-    rgba(0, 0, 0, 0.82) 76%,
-    rgba(0, 0, 0, 0.38) 90%,
-    transparent 99%
+    #000 calc(var(--reveal) * 58%),
+    rgba(0, 0, 0, 0.82) calc(var(--reveal) * 76%),
+    rgba(0, 0, 0, 0.38) calc(var(--reveal) * 90%),
+    transparent calc(var(--reveal) * 99%)
   );
   mask-image: radial-gradient(
     circle closest-side,
-    #000 58%,
-    rgba(0, 0, 0, 0.82) 76%,
-    rgba(0, 0, 0, 0.38) 90%,
-    transparent 99%
+    #000 calc(var(--reveal) * 58%),
+    rgba(0, 0, 0, 0.82) calc(var(--reveal) * 76%),
+    rgba(0, 0, 0, 0.38) calc(var(--reveal) * 90%),
+    transparent calc(var(--reveal) * 99%)
   );
 }
 
@@ -589,17 +595,17 @@ main {
   border-radius: 0.9rem;
   -webkit-mask-image: radial-gradient(
     ellipse closest-side,
-    #000 52%,
-    rgba(0, 0, 0, 0.8) 72%,
-    rgba(0, 0, 0, 0.32) 88%,
-    transparent 99%
+    #000 calc(var(--reveal) * 52%),
+    rgba(0, 0, 0, 0.8) calc(var(--reveal) * 72%),
+    rgba(0, 0, 0, 0.32) calc(var(--reveal) * 88%),
+    transparent calc(var(--reveal) * 99%)
   );
   mask-image: radial-gradient(
     ellipse closest-side,
-    #000 52%,
-    rgba(0, 0, 0, 0.8) 72%,
-    rgba(0, 0, 0, 0.32) 88%,
-    transparent 99%
+    #000 calc(var(--reveal) * 52%),
+    rgba(0, 0, 0, 0.8) calc(var(--reveal) * 72%),
+    rgba(0, 0, 0, 0.32) calc(var(--reveal) * 88%),
+    transparent calc(var(--reveal) * 99%)
   );
 }
 
