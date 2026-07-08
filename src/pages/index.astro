@@ -17,16 +17,19 @@ import Aplicacao from '../components/Aplicacao.astro';
 const site = Astro.site ?? new URL('http://localhost:4321');
 const canonical = new URL('/', site).href;
 const ogImg = new URL('/space/sol.jpg', site).href;
-const titulo = '7Aery — Sites, apps e produtos digitais';
+const titulo = '7Aery · Soluções em tecnologia para negócios digitais e omnichannel';
 const descricao =
-  'Sites, apps e presença digital sob aplicação — sem preços de prateleira. Do Sol a Netuno, cada rolagem remove um véu; além do sistema, a primeira rede social for tech do mundo. Projeto de Marcílio Lemos.';
+  'Sites, apps e operações omnichannel construídos sob medida. Funil validado, da vitrine ao WhatsApp do seu time. Trabalhos somente por aplicação. Projeto de Marcílio Lemos.';
 ---
 
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover"
+    />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#04050a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

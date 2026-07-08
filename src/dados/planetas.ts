@@ -23,7 +23,7 @@ export const planetas: Planeta[] = [
     tema: 'A nova loja',
     titulo: 'A loja do empresário mudou de endereço.',
     frase:
-      'Se toda operação pode virar algoritmo, a nova loja é um funil online — aberta o dia inteiro, gerando leads enquanto o negócio opera.',
+      'Se toda operação pode virar algoritmo, a nova loja é um funil online, aberta o dia inteiro, gerando leads enquanto o negócio opera.',
     img: '/space/mercurio.jpg',
     alt: 'Mosaico global de Mercúrio registrado pela sonda MESSENGER (NASA)',
     glow: 'rgba(205, 200, 192, 0.5)',
@@ -35,7 +35,7 @@ export const planetas: Planeta[] = [
     tema: 'Vitrine',
     titulo: 'A vitrine é o topo do funil.',
     frase:
-      'Redes sociais, site, app: é onde o cliente passa, olha e decide entrar. Vitrine boa não grita — posiciona e atrai.',
+      'Redes sociais, site, app: é onde o cliente passa, olha e decide entrar. Vitrine boa não grita: posiciona e atrai.',
     img: '/space/venus.jpg',
     alt: 'Vista global de Vênus composta com dados das missões Magellan e Pioneer (NASA/JPL)',
     glow: 'rgba(255, 172, 92, 0.5)',
@@ -50,7 +50,7 @@ export const planetas: Planeta[] = [
     frase:
       'O cliente recebe só a informação que precisa para avançar. Quem chega ao fim do funil, chega pronto para comprar.',
     img: '/space/terra.jpg',
-    alt: 'A Terra vista pela tripulação da Apollo 17 — a Blue Marble (NASA)',
+    alt: 'A Terra vista pela tripulação da Apollo 17, a Blue Marble (NASA)',
     glow: 'rgba(122, 172, 255, 0.5)',
     shape: 'disc',
   },
@@ -71,7 +71,7 @@ export const planetas: Planeta[] = [
     tema: 'Velocidade e escala',
     titulo: 'Arquitetura que aguenta o sucesso.',
     frase:
-      'Carregamento num instante e estrutura sólida do primeiro acesso ao pico de tráfego — crescer não pode ser motivo de colapso.',
+      'Carregamento num instante e estrutura sólida do primeiro acesso ao pico de tráfego. Crescer não pode ser motivo de colapso.',
     img: '/space/jupiter.jpg',
     alt: 'Retrato de Júpiter em disco completo com a Grande Mancha Vermelha, pelo Hubble (NASA/ESA, programa OPAL)',
     glow: 'rgba(255, 200, 152, 0.42)',
@@ -104,7 +104,7 @@ export const planetas: Planeta[] = [
     tema: 'Time',
     titulo: 'Feito por gente que se importa.',
     frase:
-      'Um time pequeno, contratado a dedo. É por isso que a agenda é curta — e por isso que a régua se mantém.',
+      'Um time pequeno, contratado a dedo. É por isso que a agenda é curta, e por isso que a régua se mantém.',
     img: '/space/netuno.jpg',
     alt: 'Netuno em disco completo, registrado pela Voyager 2 (NASA/JPL)',
     glow: 'rgba(112, 152, 255, 0.5)',
