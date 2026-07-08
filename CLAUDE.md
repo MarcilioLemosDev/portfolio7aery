@@ -24,12 +24,16 @@ estático, deploy na Vercel (preview por branch).
   dados em `src/dados/planetas.ts`) → `Produtos` (fila) → `Rede` (rede
   for tech) → `Rodape`; `Hud` (appbar + telemetria + trilho de paradas)
   e `Aplicacao` (diálogo) fora do `<main>`
-- **A narrativa dos véus NÃO nomeia os planetas** e segue o fio da
-  "nova loja" (ver `docs/CONCEITO.md`): véus 01–04 = tese → vitrine →
-  qualificação → fast checkout; véus 05–08 = pilares de execução.
-  Claim direto + sustentação objetiva; temas nos eyebrows
-  (`Véu NN · Tema`). O método Triplo Diamante só aparece como alusão
-  (linha `.processo` em Produtos)
+- **A narrativa dos véus NÃO nomeia os planetas nem usa a palavra
+  "véu" na copy visível** (jargão zero desde a R7) e segue o fio da
+  "nova loja" (ver `docs/CONCEITO.md`): seções 01–04 = tese → vitrine →
+  qualificação → fast checkout; 05–08 = pilares de execução. Claim
+  direto + sustentação objetiva; eyebrows `NN · Tema`. O método Triplo
+  Diamante só aparece como alusão (linha `.processo` em Produtos)
+- Produtos: 3 escopos (Site / Site + App / Site + App + Rede Social) +
+  card Plus de largura total (`.tier-plus`): "Modelo preditivo de
+  venda". Chip do diálogo usa "Escopo:"; a seção da rede social é limpa
+  e direta (sem misticismo)
 - Appbar (`Hud.astro`): marca à esquerda; à direita links âncora
   (`data-stop`), profundidade % e CTA `Aplicar` (`data-aplicar`);
   ganha fundo blur com a classe `.rolou` após 60px de rolagem

@@ -78,10 +78,14 @@ Projetos: "Entender → versões livres → deploy".
 O desenvolvedor não busca clientes; clientes vêm até ele.
 
 - **Nenhum preço público.**
-- Produtos são "missões" com **aplicação para fila de espera**:
-  1. **Órbita I — Site**
-  2. **Órbita II — Site + App**
-  3. **Órbita III — Site + App + Instagram**
+- Produtos com **aplicação para fila de espera** (pivô da R7):
+  1. **Site** — a vitrine essencial
+  2. **Site + App** — vitrine e loja, com qualificação embutida
+  3. **Site + App + Rede Social** — o funil inteiro, até o WhatsApp
+     do time
+  4. **Plus: Modelo preditivo de venda** — para qualquer escopo;
+     acompanha a conversa vendedor↔lead e devolve estatísticas e
+     insights (ex.: o momento certo de chamar o fechamento)
 - Tom: agenda deliberadamente limitada, convite após avaliação,
   "vagas limitadas por trimestre".
 
@@ -143,6 +147,15 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   seguem com os pilares de execução; produtos na linguagem do funil
   (vitrine essencial / vitrine e loja / o funil inteiro) + linha do
   processo "Entender → versões livres → deploy".
+- **R7 (feita): pivô do produto e jargão zero** — quarto item na
+  oferta: Plus "Modelo preditivo de venda" (card destacado de largura
+  total); tier 3 vira "Site + App + Rede Social"; a palavra "véu" e o
+  vocabulário místico saíram da copy visível (eyebrows viram
+  `NN · Tema`, chip do diálogo vira "Escopo:", parada do trilho vira
+  REDE); seção da rede social reescrita limpa (recruta engenharia,
+  design e produto; "vagas limitadas · detalhes na conversa"). O
+  conceito dos véus segue vivo como estrutura visual — só não é mais
+  nomeado.
 - **Dogfooding via Vercel**: cada push = Preview URL; o proprietário
   testa e traz ajustes.
 - **Rodadas livres**: refinamentos guiados pelo uso (copy, backend dos

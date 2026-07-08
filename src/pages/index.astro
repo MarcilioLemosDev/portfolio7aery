@@ -358,7 +358,7 @@ const descricao =
             : 'Aplicar para construir a primeira rede social for tech';
         if (presetEl) {
           presetEl.hidden = !preset;
-          presetEl.textContent = preset ? `Missão: ${preset}` : '';
+          presetEl.textContent = preset ? `Escopo: ${preset}` : '';
         }
         camposProjeto.forEach((c) => setCampo(c, projeto, ['mensagem']));
         camposRede.forEach((c) => setCampo(c, !projeto, ['stack', 'mensagem_rede']));
