@@ -354,6 +354,9 @@ main {
 .hero-copy .eyebrow {
   color: var(--gold);
   margin: 1.1rem 0 1.4rem;
+  /* frase mais longa que a assinatura anterior: reduzir o tracking
+     padrão do .mono para caber melhor sem virar duas linhas */
+  letter-spacing: 0.16em;
 }
 
 .hero-copy h1 {
