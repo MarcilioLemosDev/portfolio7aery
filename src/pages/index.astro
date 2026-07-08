@@ -17,9 +17,9 @@ import Aplicacao from '../components/Aplicacao.astro';
 const site = Astro.site ?? new URL('http://localhost:4321');
 const canonical = new URL('/', site).href;
 const ogImg = new URL('/space/sol.jpg', site).href;
-const titulo = '7Aery · E-commerce de serviços sob medida para negócios 100% digitais';
+const titulo = '7Aery · Ambiente 100% digital sob medida para o seu negócio';
 const descricao =
-  'Acompanhe o setor que mais cresce no mundo com serviços em e-commerce sob medida: interfaces responsivas que direcionam o lead para a zona quente, com custos até 90% abaixo do mercado tradicional. Trabalhos somente por aplicação. Projeto de Marcílio Lemos.';
+  'Traga seus serviços para o digital com custos até 90% abaixo do mercado físico tradicional. Interfaces responsivas que direcionam seus clientes para a zona quente de fechamento. Trabalhos somente por aplicação. Projeto de Marcílio Lemos.';
 ---
 
 <!doctype html>
@@ -41,7 +41,7 @@ const descricao =
     <meta property="og:title" content={titulo} />
     <meta
       property="og:description"
-      content="Sites, apps e operações omnichannel construídos sob medida. Somente por aplicação."
+      content="Traga seus serviços para o digital com custos até 90% abaixo do mercado físico tradicional. Somente por aplicação."
     />
     <meta property="og:image" content={ogImg} />
     <meta name="twitter:card" content="summary_large_image" />
