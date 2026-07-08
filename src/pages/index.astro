@@ -318,6 +318,22 @@ const descricao =
         });
       });
 
+      /* ── Seletor de idioma ────────────────────────────────────────────── */
+      const langWrap = document.querySelector<HTMLElement>('[data-lang-switch]');
+      const langBtn = document.querySelector<HTMLButtonElement>('[data-lang-btn]');
+      const langMenu = document.querySelector<HTMLElement>('[data-lang-menu]');
+      langBtn?.addEventListener('click', () => {
+        const abrindo = langMenu?.hasAttribute('hidden');
+        langMenu?.toggleAttribute('hidden', !abrindo);
+        langBtn.setAttribute('aria-expanded', String(!!abrindo));
+      });
+      document.addEventListener('click', (e) => {
+        if (langWrap && !langWrap.contains(e.target as Node)) {
+          langMenu?.setAttribute('hidden', '');
+          langBtn?.setAttribute('aria-expanded', 'false');
+        }
+      });
+
       /* ── Aplicação: diálogo único (projeto / rede) ───────────────────── */
       const dialog = document.querySelector<HTMLDialogElement>('[data-apply-dialog]');
       const formView = document.querySelector<HTMLElement>('[data-apply-form]');

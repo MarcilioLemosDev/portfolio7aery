@@ -156,6 +156,14 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   design e produto; "vagas limitadas · detalhes na conversa"). O
   conceito dos véus segue vivo como estrutura visual — só não é mais
   nomeado.
+- **R9 (feita): seletor de idioma (estrutura)** — Astro i18n routing
+  configurado (`pt` padrão sem prefixo, `en` e `fr` com
+  `fallbackType: 'rewrite'`): `/en/` e `/fr/` já respondem 200 e
+  servem o conteúdo pt-BR automaticamente, sem duplicar a página.
+  Seletor "PT-BR ⌄" na appbar, ao lado do Aplicar (dropdown com as
+  três opções, fecha ao clicar fora). **Tradução real para inglês e
+  francês fica para uma próxima rodada** — decisão explícita do
+  cliente para não misturar estrutura com conteúdo na mesma entrega.
 - **R8 (feita): Trabalhe conosco e diálogo corrigido** — a seção da
   "rede" vira uma sessão simples de trabalhe conosco: "O time cresce
   por aplicação · engenharia, design e produto"; parada do trilho vira

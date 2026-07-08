@@ -171,6 +171,76 @@ main {
   filter: brightness(1.09);
 }
 
+.hud-lang {
+  position: relative;
+}
+
+.hud-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  color: var(--dim);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.hud-lang-btn:hover {
+  border-color: rgba(242, 201, 136, 0.4);
+  color: var(--ink);
+}
+
+.hud-lang-btn svg {
+  width: 9px;
+  height: 9px;
+  color: var(--faint);
+  transition: transform 0.2s;
+}
+
+.hud-lang-btn[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.hud-lang-menu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  min-width: 6.5rem;
+  background: rgba(10, 13, 22, 0.97);
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  padding: 0.35rem;
+  list-style: none;
+  z-index: 25;
+}
+
+.hud-lang-menu[hidden] {
+  display: none;
+}
+
+.hud-lang-menu a {
+  display: block;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.4rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.hud-lang-menu a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ink);
+}
+
+.hud-lang-menu a[data-active='true'] {
+  color: var(--gold);
+}
+
 @media (max-width: 760px) {
   .hud-top {
     padding: 0.7rem 1rem;
@@ -188,6 +258,10 @@ main {
   .hud-cta {
     padding: 0.45rem 0.9rem;
     letter-spacing: 0.14em;
+  }
+
+  .hud-lang-btn {
+    padding: 0.35rem 0.55rem;
   }
 }
 

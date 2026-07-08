@@ -18,6 +18,11 @@ estático, deploy na Vercel (preview por branch).
 
 - **Astro 7**, `output: 'static'`, página única (`src/pages/index.astro`)
   com `<head>` inline + sitemap (`@astrojs/sitemap`)
+- **i18n**: `astro.config.mjs` define locales `pt` (padrão, sem
+  prefixo) / `en` / `fr` com `fallbackType: 'rewrite'` — `/en/` e
+  `/fr/` servem automaticamente o conteúdo pt-BR até a tradução real
+  (rodada futura). Seletor de idioma no `Hud.astro` (`Astro.currentLocale`
+  + links `hreflang`); toggle do menu no script central
 - Narrativa (componentes em `src/components/`): `Heroi` (Sol, pinned +
   véu) → `ProvaSocial` (posição firstbase: logo após o herói; MI6, logo
   em `public/logo-mi6.png`) → `Planeta` × 8 (ids `veu-01`…`veu-08`,

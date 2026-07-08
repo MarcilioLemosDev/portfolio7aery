@@ -14,6 +14,9 @@ produto, conceito e método de desenvolvimento em
 ## Stack
 
 - **Astro 7** (`output: 'static'`), Vite bundler, `@astrojs/sitemap`
+- **i18n**: `pt` (padrão), `en`, `fr` — `en`/`fr` ainda servem o
+  conteúdo em português via fallback automático do Astro; tradução
+  real é rodada futura
 - **GSAP ScrollTrigger** (véus e entrada orbital) + **Lenis** (scroll
   suave, dirigido pelo ticker do GSAP), num único `<script>` central
   em `src/pages/index.astro`

@@ -1,5 +1,12 @@
 ---
 import { paradas } from '../dados/planetas';
+
+const idiomas = [
+  { code: 'pt', href: '/', label: 'PT-BR' },
+  { code: 'en', href: '/en/', label: 'EN' },
+  { code: 'fr', href: '/fr/', label: 'FR' },
+];
+const atual = idiomas.find((i) => i.code === (Astro.currentLocale ?? 'pt')) ?? idiomas[0];
 ---
 
 <div class="hud-progress" data-hud-progress></div>
@@ -11,6 +18,31 @@ import { paradas } from '../dados/planetas';
     <button type="button" class="mono hud-link" data-stop="orbitas">Projetos</button>
     <button type="button" class="mono hud-link" data-stop="rede">Time</button>
     <span class="mono hud-depth">Profundidade <span data-hud-pct>0</span>%</span>
+    <div class="hud-lang" data-lang-switch>
+      <button
+        type="button"
+        class="mono hud-lang-btn"
+        data-lang-btn
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <span>{atual.label}</span>
+        <svg viewBox="0 0 10 6" aria-hidden="true">
+          <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" />
+        </svg>
+      </button>
+      <ul class="hud-lang-menu mono" data-lang-menu hidden>
+        {
+          idiomas.map((i) => (
+            <li>
+              <a href={i.href} hreflang={i.code} data-active={i.code === atual.code}>
+                {i.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
     <button type="button" class="mono hud-cta" data-aplicar="projeto">Aplicar</button>
   </nav>
 </header>
