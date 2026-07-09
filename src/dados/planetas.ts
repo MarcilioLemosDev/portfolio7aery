@@ -47,7 +47,7 @@ export const planetas: Planeta[] = [
     tema: 'Qualificação',
     titulo: 'Dentro da loja, qualificação inteligente.',
     frase:
-      'O cliente recebe só a informação que precisa para avançar. Quem chega ao fim do funil, chega pronto para comprar.',
+      'Poucas perguntas, na hora certa, só o necessário para entender se faz sentido seguir. Quem chega ao fim do funil, chega pronto para comprar.',
     img: '/space/terra.jpg',
     alt: 'A Terra vista pela tripulação da Apollo 17, a Blue Marble (NASA)',
     glow: 'rgba(122, 172, 255, 0.5)',
@@ -69,7 +69,7 @@ export const planetas: Planeta[] = [
     tema: 'Velocidade e escala',
     titulo: 'Arquitetura que aguenta o sucesso.',
     frase:
-      'Carregamento num instante e estrutura sólida do primeiro acesso ao pico de tráfego. Crescer não pode ser motivo de colapso.',
+      'Carregamento num instante e estrutura sólida do primeiro acesso ao pico de tráfego, para o negócio crescer sem o site sair do ar.',
     img: '/space/jupiter.jpg',
     alt: 'Retrato de Júpiter em disco completo com a Grande Mancha Vermelha, pelo Hubble (NASA/ESA, programa OPAL)',
     glow: 'rgba(255, 200, 152, 0.42)',
@@ -80,7 +80,7 @@ export const planetas: Planeta[] = [
     tema: 'Precisão',
     titulo: 'Engenharia é disciplina.',
     frase:
-      'Código revisado, testado e medido antes de ir ao ar. Régua, nunca improviso.',
+      'Código revisado, testado e medido antes de ir ao ar. Mesma régua em cada decisão técnica, sem atalho.',
     img: '/space/saturno.jpg',
     alt: 'Mosaico de Saturno e seus anéis registrado pela sonda Cassini (NASA/JPL/Space Science Institute)',
     glow: 'rgba(240, 218, 170, 0.4)',
@@ -100,9 +100,9 @@ export const planetas: Planeta[] = [
   {
     id: 'veu-08',
     tema: 'Time',
-    titulo: 'Feito por gente que se importa.',
+    titulo: 'Um time pequeno, escolhido a dedo.',
     frase:
-      'Um time pequeno, contratado a dedo. É por isso que a agenda é curta, e por isso que a régua se mantém.',
+      'Mesma régua do primeiro projeto ao último. É por isso que a agenda é curta, e por isso que ela se mantém.',
     img: '/space/netuno.jpg',
     alt: 'Netuno em disco completo, registrado pela Voyager 2 (NASA/JPL)',
     glow: 'rgba(112, 152, 255, 0.5)',
