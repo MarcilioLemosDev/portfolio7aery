@@ -48,6 +48,19 @@ estático, deploy na Vercel (preview por branch).
   (`data-stop`), profundidade % e CTA `Aplicar` (`data-aplicar`);
   ganha fundo blur com a classe `.rolou` após 60px de rolagem
   (toggle no handler de scroll do `index.astro`)
+- **Trilho de paradas (`.hud-stops`, desktop ≥1000px only) é uma órbita
+  em miniatura**: cada parada de planeta (`veu-01`..`veu-08`) vira um
+  anel (`.rail-orbit`) com o planeta girando dentro (`.rail-pivot` +
+  `.rail-planet`, `18×18px` reaproveitando as imagens normalizadas). O
+  planeta grande (`.orb`) some acima de 1000px — vive só na órbita; no
+  mobile (trilho escondido) o `.orb` grande continua exatamente como
+  antes, sem nenhuma mudança. Giro amarrado ao scroll da PÁGINA INTEIRA
+  (não da seção), velocidade decrescente por planeta (`data-speed`,
+  `1.6 - índice*0.18`, Mercúrio mais rápido que Netuno). Cada
+  planetinha nasce apagado/dessaturado e "acende" (`data-revelado`) na
+  primeira vez que sua seção fica ativa — e não apaga de novo depois
+  (extensão do mesmo `IntersectionObserver` que já controlava
+  `data-active`)
 - **Todo o comportamento client vive em um único `<script>` no
   `index.astro`** (empacotado pelo Vite): Lenis + ticker GSAP, timelines
   ScrollTrigger, céu estrelado em canvas, HUD (progresso/paradas/nav) e

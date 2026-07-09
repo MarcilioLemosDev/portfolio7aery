@@ -324,6 +324,58 @@ main {
   box-shadow: 0 0 10px rgba(242, 201, 136, 0.8);
 }
 
+/* Órbita mini: cada parada de planeta vira um anel com o planeta girando
+   dentro. O giro (--rail-pivot) é aplicado via GSAP, amarrado ao scroll da
+   página inteira. O planeta nasce apagado/dessaturado (o véu) e acende
+   (data-revelado) na primeira vez que a seção correspondente fica ativa —
+   e permanece aceso depois, mesmo passando a seção (não volta a apagar). */
+.rail-orbit {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.hud-stop[data-active='true'] .rail-orbit {
+  border-color: rgba(242, 201, 136, 0.55);
+  box-shadow: 0 0 10px rgba(242, 201, 136, 0.35);
+}
+
+.rail-pivot {
+  position: absolute;
+  inset: 0;
+}
+
+.rail-planet {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.45);
+  opacity: 0.55;
+  transition: filter 0.7s ease, opacity 0.7s ease;
+}
+
+.hud-stop[data-revelado='true'] .rail-planet {
+  filter: grayscale(0) brightness(1);
+  opacity: 1;
+}
+
+/* Acima de 1000px o planeta grande sai (vive só na órbita do trilho); no
+   mobile (trilho escondido) o planeta grande continua exatamente como
+   antes — reveal, máscara e tudo mais, sem nenhuma mudança. */
+@media (min-width: 1000px) {
+  .planet .orb {
+    display: none;
+  }
+}
+
 @media (max-width: 1000px) {
   .hud-stops {
     display: none;

@@ -156,6 +156,16 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   design e produto; "vagas limitadas · detalhes na conversa"). O
   conceito dos véus segue vivo como estrutura visual — só não é mais
   nomeado.
+- **R13 (feita): planeta grande vira órbita no trilho (desktop)** — o
+  planeta centralizado de cada véu (com a revelação cinematográfica)
+  sai do centro e a metáfora fica mais literal: o trilho de paradas
+  vira uma órbita em miniatura, cada planeta girando dentro do próprio
+  anel, giro amarrado ao scroll da página inteira, velocidade
+  decrescente (Mercúrio mais rápido, Netuno mais lento). O véu migra
+  pro trilho: o planetinha nasce apagado e acende ao ativar a seção,
+  ficando aceso depois. Mudança **desktop-only** (≥1000px, onde o
+  trilho já vivia) — mobile mantém o planeta grande e a revelação
+  exatamente como antes, já que o trilho não cabe em tela estreita.
 - **R12 (feita): normalização das imagens mata o recorte cru** — a
   abordagem de `maskStops` por planeta (R11) foi insuficiente: o
   problema real era que cada foto-fonte enquadrava o disco num tamanho

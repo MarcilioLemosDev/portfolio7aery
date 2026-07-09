@@ -265,6 +265,24 @@ const descricao =
             0.2
           );
 
+        // Órbita mini do trilho: gira com o scroll da página inteira (não só
+        // da seção), cada planeta numa velocidade diferente (data-speed).
+        const railPivots = gsap.utils.toArray<HTMLElement>('[data-rail-pivot]');
+        if (railPivots.length) {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: document.body,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 0.3,
+            },
+          }).to(railPivots, {
+            rotation: (_i: number, target: HTMLElement) =>
+              360 * Number(target.dataset.speed ?? 1),
+            ease: 'none',
+          }, 0);
+        }
+
         window.addEventListener('load', () => ScrollTrigger.refresh());
       }
 
@@ -292,7 +310,11 @@ const descricao =
             if (entry.isIntersecting) {
               const id = entry.target.id;
               stopButtons.forEach((b) => {
-                b.dataset.active = String(b.dataset.stop === id);
+                const ativo = b.dataset.stop === id;
+                b.dataset.active = String(ativo);
+                // uma vez revelado, o planetinha da órbita fica aceso —
+                // não volta a apagar ao passar da seção.
+                if (ativo) b.dataset.revelado = 'true';
               });
             }
           }
