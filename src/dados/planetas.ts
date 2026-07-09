@@ -4,6 +4,10 @@
 // no título, sustentação objetiva na frase (referência de tom: lerian.studio).
 // Discos usam crop circular com máscara suave; panorâmicas usam shape "wide".
 
+// As imagens em public/space/ são normalizadas por scripts/normalize-discos
+// (scratchpad): cada disco fica centralizado e preenchendo ~90% do quadro,
+// então uma única máscara radial no CSS serve para todos — sem pos/zoom/
+// maskStops por planeta. Se trocar uma imagem, rode a normalização de novo.
 export type Planeta = {
   id: string;
   tema: string;
@@ -13,16 +17,6 @@ export type Planeta = {
   alt: string;
   glow: string;
   shape: 'disc' | 'wide';
-  pos?: string;
-  zoom?: number;
-  // Paradas da máscara radial (% do raio, na ordem opaco→transparente).
-  // Cada imagem-fonte enquadra o disco de um jeito diferente (medido em
-  // scratchpad/medir-discos.mjs: Mercúrio/Vênus/Urano preenchem ~90% do
-  // quadro, Terra só 66,7%, Netuno só 56,6%) — sem isso, a margem preta
-  // da própria foto (não do site) fica exposta em opacidade alta antes
-  // do fade começar, aparecendo como um contorno duro. Default (a maioria
-  // dos planetas) fica implícito no CSS; só sobrescreve quem precisa.
-  maskStops?: [number, number, number, number];
 };
 
 export const planetas: Planeta[] = [
@@ -36,7 +30,6 @@ export const planetas: Planeta[] = [
     alt: 'Mosaico global de Mercúrio registrado pela sonda MESSENGER (NASA)',
     glow: 'rgba(205, 200, 192, 0.5)',
     shape: 'disc',
-    zoom: 1.03,
   },
   {
     id: 'veu-02',
@@ -48,8 +41,6 @@ export const planetas: Planeta[] = [
     alt: 'Vista global de Vênus composta com dados das missões Magellan e Pioneer (NASA/JPL)',
     glow: 'rgba(255, 172, 92, 0.5)',
     shape: 'disc',
-    zoom: 1.04,
-    pos: '50% 48%',
   },
   {
     id: 'veu-03',
@@ -61,7 +52,6 @@ export const planetas: Planeta[] = [
     alt: 'A Terra vista pela tripulação da Apollo 17, a Blue Marble (NASA)',
     glow: 'rgba(122, 172, 255, 0.5)',
     shape: 'disc',
-    maskStops: [52, 64, 78, 90],
   },
   {
     id: 'veu-04',
@@ -73,7 +63,6 @@ export const planetas: Planeta[] = [
     alt: 'Globo de Marte com os vulcões de Tharsis e o Valles Marineris (NASA/JPL/Malin Space Science Systems)',
     glow: 'rgba(255, 142, 92, 0.5)',
     shape: 'disc',
-    pos: '46% 47%',
   },
   {
     id: 'veu-05',
@@ -118,8 +107,6 @@ export const planetas: Planeta[] = [
     alt: 'Netuno em disco completo, registrado pela Voyager 2 (NASA/JPL)',
     glow: 'rgba(112, 152, 255, 0.5)',
     shape: 'disc',
-    pos: '48% 47%',
-    maskStops: [42, 54, 68, 82],
   },
 ];
 

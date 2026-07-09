@@ -156,15 +156,22 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   design e produto; "vagas limitadas · detalhes na conversa"). O
   conceito dos véus segue vivo como estrutura visual — só não é mais
   nomeado.
-- **R11 (feita): recorte calibrado por imagem + Via Láctea** — medido
-  com um script (`scratchpad/medir-discos.mjs`, amostra pixels reais)
-  quanto cada foto-fonte preenche o quadro: Mercúrio/Vênus/Urano ~90%,
-  Terra 66,7%, Netuno 56,6%. A máscara compartilhada expunha a margem
-  preta *da própria foto* como contorno duro nos planetas menores —
-  Terra e Netuno ganharam `maskStops` calibrados em `planetas.ts`;
-  Saturno (wide) teve os stops alargados porque a máscara antiga
-  cortava anel de verdade (conteúdo real chega a 62,8% vertical, a
-  máscara começava a apagar em 52%). Fundo da seção "Trabalhe conosco"
+- **R12 (feita): normalização das imagens mata o recorte cru** — a
+  abordagem de `maskStops` por planeta (R11) foi insuficiente: o
+  problema real era que cada foto-fonte enquadrava o disco num tamanho
+  diferente (Terra preenchia só 66,7% do quadro, Netuno 56,6%), então a
+  margem preta *da própria foto* cobria as estrelas como um halo escuro
+  com borda dura. Solução definitiva: `scripts/normalize-discos.mjs`
+  reenquadra cada imagem para o disco ficar centralizado e preencher
+  ~90% do quadro. Com todas normalizadas, uma **única máscara** serve
+  para todos (sem `pos`/`zoom`/`maskStops` por planeta), e ela fica
+  transparente já em ~87% — antes da borda nítida do disco — então a
+  linha dura nunca aparece. Verificado por perfil de luminância radial:
+  nenhum "penhasco" (queda >100 num passo); transições suaves de 11–28,
+  comparáveis à Vênus (referência que já estava correta).
+- **R11 (feita): recorte calibrado por imagem + Via Láctea** — primeira
+  tentativa (insuficiente, ver R12): `maskStops` por planeta em
+  `planetas.ts`. A parte que ficou: fundo da seção "Trabalhe conosco"
   trocado do Hubble Deep Field (esparso, não combinava mais com a copy
   aterrada pós-R8) pela Via Láctea — composição Spitzer/Hubble/Chandra
   do centro galático (NASA, domínio público), arquivo renomeado de

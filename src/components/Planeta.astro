@@ -8,30 +8,11 @@ interface Props {
 
 const { planeta, indice } = Astro.props;
 const numero = String(indice + 1).padStart(2, '0');
-const estiloImg = [
-  `object-position:${planeta.pos ?? '50% 50%'}`,
-  planeta.zoom ? `transform:scale(${planeta.zoom})` : null,
-]
-  .filter(Boolean)
-  .join(';');
-const [m1, m2, m3, m4] = planeta.maskStops ?? [];
-const estiloSecao = [
-  `--glow:${planeta.glow}`,
-  planeta.maskStops ? `--m1:${m1}%;--m2:${m2}%;--m3:${m3}%;--m4:${m4}%` : null,
-]
-  .filter(Boolean)
-  .join(';');
 ---
 
-<section id={planeta.id} class="planet" style={estiloSecao}>
+<section id={planeta.id} class="planet" style={`--glow:${planeta.glow}`}>
   <div class={planeta.shape === 'wide' ? 'orb wide' : 'orb'}>
-    <img
-      src={planeta.img}
-      alt={planeta.alt}
-      loading="lazy"
-      decoding="async"
-      style={estiloImg}
-    />
+    <img src={planeta.img} alt={planeta.alt} loading="lazy" decoding="async" />
   </div>
   <div class="p-copy">
     <p class="mono p-eyebrow">{numero} · {planeta.tema}</p>
