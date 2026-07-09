@@ -1,6 +1,4 @@
 ---
-import { paradas } from '../dados/planetas';
-
 const idiomas = [
   { code: 'pt', href: '/', label: 'PT-BR' },
   { code: 'en', href: '/en/', label: 'EN' },
@@ -14,10 +12,7 @@ const atual = idiomas.find((i) => i.code === (Astro.currentLocale ?? 'pt')) ?? i
   <button type="button" class="mono hud-brand" data-stop="sol" aria-label="Voltar ao topo">
     <img src="/logo.svg" alt="" width="12" height="12" /> 7Aery
   </button>
-  <nav class="hud-nav" aria-label="Seções do site">
-    <button type="button" class="mono hud-link" data-stop="orbitas">Projetos</button>
-    <button type="button" class="mono hud-link" data-stop="rede">Time</button>
-    <span class="mono hud-depth">Profundidade <span data-hud-pct>0</span>%</span>
+  <nav class="hud-nav" aria-label="Menu">
     <div class="hud-lang" data-lang-switch>
       <button
         type="button"
@@ -46,18 +41,3 @@ const atual = idiomas.find((i) => i.code === (Astro.currentLocale ?? 'pt')) ?? i
     <button type="button" class="mono hud-cta" data-aplicar="projeto">Aplicar</button>
   </nav>
 </header>
-<nav class="hud-stops" aria-label="Paradas da travessia">
-  {
-    paradas.map((parada) => (
-      <button
-        type="button"
-        class="hud-stop"
-        data-stop={parada.id}
-        aria-label={`Ir para ${parada.label}`}
-      >
-        <span class="mono">{parada.label}</span>
-        <i />
-      </button>
-    ))
-  }
-</nav>

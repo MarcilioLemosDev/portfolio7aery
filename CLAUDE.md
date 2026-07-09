@@ -23,12 +23,14 @@ estático, deploy na Vercel (preview por branch).
   `/fr/` servem automaticamente o conteúdo pt-BR até a tradução real
   (rodada futura). Seletor de idioma no `Hud.astro` (`Astro.currentLocale`
   + links `hreflang`); toggle do menu no script central
-- Narrativa (componentes em `src/components/`): `Heroi` (Sol, pinned +
-  véu) → `ProvaSocial` (posição firstbase: logo após o herói; MI6, logo
-  em `public/logo-mi6.png`) → `Planeta` × 8 (ids `veu-01`…`veu-08`,
-  dados em `src/dados/planetas.ts`) → `Produtos` (fila) → `Rede` (rede
-  for tech) → `Rodape`; `Hud` (appbar + telemetria + trilho de paradas)
-  e `Aplicacao` (diálogo) fora do `<main>`
+- Estrutura atual (enxugada na R15, ver `docs/CONCEITO.md`): a home tem
+  só **`Heroi`** (Sol, pinned + véu) **→ `ProvaSocial`** (MI6, logo em
+  `public/logo-mi6.png`) dentro do `<main>`; `Hud` (appbar) e
+  `Aplicacao` (diálogo) fora do `<main>`; `Rodape` no fim. Órbita dos
+  véus, Produtos e Trabalhe conosco foram **removidos** (componentes
+  `Orbita`/`Produtos`/`Rede` deletados; `planetas.ts` + imagens ficam no
+  repo caso voltem). Captação: CTA do hero e `Aplicar` do appbar abrem
+  o diálogo `projeto`
 - **A narrativa dos véus NÃO nomeia os planetas nem usa a palavra
   "véu" na copy visível** (jargão zero desde a R7) e segue o fio da
   "nova loja" (ver `docs/CONCEITO.md`): seções 01–04 = tese → vitrine →

@@ -156,7 +156,18 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   design e produto; "vagas limitadas · detalhes na conversa"). O
   conceito dos véus segue vivo como estrutura visual — só não é mais
   nomeado.
-- **R14 (feita): órbita única, os planetas giram numa mesma elipse** —
+- **R15 (feita): enxugar a home** — cliente pediu para remover todo o
+  corpo de informação e deixar só o que já estava revisado: **hero
+  (home) + prova social + appbar + rodapé**. Removidas do site a órbita
+  dos véus (R14), a seção de Produtos e a de Trabalhe conosco
+  (componentes `Orbita`, `Produtos`, `Rede` deletados). Efeitos
+  colaterais tratados: links "Projetos"/"Time" saíram do appbar (as
+  seções não existem mais), o trilho de paradas foi removido, e o CTA
+  do hero ("Entrar na fila de espera") agora abre o diálogo de
+  aplicação direto (antes rolava para Produtos). Captação intacta
+  (hero CTA + appbar Aplicar → diálogo). `planetas.ts` e as imagens dos
+  planetas ficam no repo (dados preservados caso a órbita volte).
+- **R14 (removida em R15): órbita única, os planetas giram numa mesma elipse** —
   virada do conceito de novo (agora desk **e** mobile, ao contrário da
   R13 que era só desktop): em vez de cada véu ter um planeta grande
   centralizado (ou a mini-órbita por planeta no trilho da R13), os 8
