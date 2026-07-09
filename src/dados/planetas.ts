@@ -36,7 +36,7 @@ export const planetas: Planeta[] = [
     tema: 'Vitrine',
     titulo: 'A vitrine é o topo do funil.',
     frase:
-      'Redes sociais, site, app: é onde o cliente passa, olha e decide entrar. Vitrine boa não grita: posiciona e atrai.',
+      'Redes sociais, site, app: é onde o cliente passa, olha e decide entrar. Uma fachada que chama atenção convida a conhecer o que vem depois.',
     img: '/space/venus.jpg',
     alt: 'Vista global de Vênus composta com dados das missões Magellan e Pioneer (NASA/JPL)',
     glow: 'rgba(255, 172, 92, 0.5)',
