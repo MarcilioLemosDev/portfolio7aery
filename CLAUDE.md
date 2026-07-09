@@ -48,34 +48,38 @@ estático, deploy na Vercel (preview por branch).
   (`data-stop`), profundidade % e CTA `Aplicar` (`data-aplicar`);
   ganha fundo blur com a classe `.rolou` após 60px de rolagem
   (toggle no handler de scroll do `index.astro`)
-- **Trilho de paradas (`.hud-stops`, desktop ≥1000px only) é uma órbita
-  em miniatura**: cada parada de planeta (`veu-01`..`veu-08`) vira um
-  anel (`.rail-orbit`) com o planeta girando dentro (`.rail-pivot` +
-  `.rail-planet`, `18×18px` reaproveitando as imagens normalizadas). O
-  planeta grande (`.orb`) some acima de 1000px — vive só na órbita; no
-  mobile (trilho escondido) o `.orb` grande continua exatamente como
-  antes, sem nenhuma mudança. Giro amarrado ao scroll da PÁGINA INTEIRA
-  (não da seção), velocidade decrescente por planeta (`data-speed`,
-  `1.6 - índice*0.18`, Mercúrio mais rápido que Netuno). Cada
-  planetinha nasce apagado/dessaturado e "acende" (`data-revelado`) na
-  primeira vez que sua seção fica ativa — e não apaga de novo depois
-  (extensão do mesmo `IntersectionObserver` que já controlava
-  `data-active`)
+- **Órbita única (`Orbita.astro`, desktop E mobile)**: os 8 véus não são
+  mais seções empilhadas com um planeta grande cada. Agora os 8 planetas
+  giram numa **mesma elipse** (círculo no chão visto de frente), o scroll
+  vertical dirige a rotação (sensação de giro lateral). Cada planeta
+  percorre a elipse: na frente (base da elipse) fica maior, mais claro e
+  na frente dos outros (`z-index` por profundidade `cos(a)`); no fundo,
+  menor e apagado. O texto do véu ativo faz crossfade
+  (`[data-orbita-texto][data-active]`). Posição/escala/z/brilho de cada
+  planeta são setados por frame no script do `index.astro`
+  (`posiciona(progress)`), dirigido por um `ScrollTrigger` que dá **pin**
+  no `.orbita-stage` ao longo de uma `.orbita` alta (760svh). `progress`
+  0→1 gira `SPIN = (2π/N)*(N-1)`, trazendo cada planeta à frente uma vez
+  em ordem; `activeIndex = round(progress*(N-1))`. Trilho de paradas
+  (`.hud-stops`) voltou a ser dots simples; as paradas `veu-01`..`08`
+  rolam para a posição em que aquele planeta fica à frente
+  (`window.orbitaAlvo(id)`) e recebem `data-active` do `posiciona`, não
+  do `IntersectionObserver` (esses ids não existem mais como elementos).
+  **Fallback sem JS / reduced-motion**: `.orbita` sem `.is-live` é uma
+  lista vertical legível (planetas + textos empilhados via
+  `display:contents`), sem pin nem giro
 - **Todo o comportamento client vive em um único `<script>` no
   `index.astro`** (empacotado pelo Vite): Lenis + ticker GSAP, timelines
   ScrollTrigger, céu estrelado em canvas, HUD (progresso/paradas/nav) e
   o diálogo de aplicação. As timelines só são criadas quando
   `matchMedia('(prefers-reduced-motion: no-preference)')` — o estado
   padrão do CSS é o estado final (site legível sem JS/animação)
-- **Revelação dos planetas**: cada `.orb` já nasce na posição final (sem
-  translação/rotação); o scroll anima a custom property `--reveal`
-  (0→1, usada em `calc()` nas paradas do `mask-image`) e o `brightness`
-  do filter — o planeta "acende" e a máscara abre de um núcleo apagado
-  até o recorte final, mesma lógica do véu do herói. Fallback CSS
-  `--reveal: 1` (estado final sem JS/reduced-motion). O texto (`.p-copy`)
-  só recebe fade no scroll-trigger; a flutuação (`y` ± 7px, loop
-  `sine.inOut`, `yoyo`, `repeat: -1`) roda independente do scroll,
-  dessincronizada por seção via `delay`/`duration` variáveis por índice
+- **Imagens dos planetas na órbita** (`.orbita-planeta img`): a mesma
+  máscara radial suave das versões anteriores (fade termina antes da
+  borda nítida do disco normalizado, sem halo/linha dura); só é
+  aplicada uma vez, igual para todos, já que as imagens são
+  normalizadas (ver abaixo). Saturno (`data-shape="wide"`) ganha um
+  contêiner um pouco maior na órbita
 - O Sol do herói usa `vmax` (não `vmin`) — em retrato o disco precisa
   transbordar a tela; scrim reforçado via media query ≤700px
 - Diálogo único `Aplicacao.astro` (variantes `projeto`/`rede`, abertas

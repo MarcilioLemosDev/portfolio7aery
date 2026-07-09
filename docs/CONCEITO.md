@@ -156,7 +156,21 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   design e produto; "vagas limitadas · detalhes na conversa"). O
   conceito dos véus segue vivo como estrutura visual — só não é mais
   nomeado.
-- **R13 (feita): planeta grande vira órbita no trilho (desktop)** — o
+- **R14 (feita): órbita única, os planetas giram numa mesma elipse** —
+  virada do conceito de novo (agora desk **e** mobile, ao contrário da
+  R13 que era só desktop): em vez de cada véu ter um planeta grande
+  centralizado (ou a mini-órbita por planeta no trilho da R13), os 8
+  planetas passam a girar numa **única elipse** — um círculo no chão
+  visto de frente, como uma porta giratória. O scroll vertical dirige a
+  rotação (o gesto continua pra cima/baixo, mas a leitura é de giro
+  lateral); cada planeta faz sua passagem mais próxima do observador
+  (frente da elipse: maior, mais claro, na frente) e o texto do véu
+  correspondente entra por crossfade. Componente novo `Orbita.astro`
+  substitui as 8 seções empilhadas + o `Planeta.astro` (removido); o
+  trilho voltou a ser dots simples. Fallback legível sem JS. Verificado
+  em runtime: frente 0→7 em ordem casando com o texto ativo, mobile sem
+  overflow, reduced-motion com os 8 textos visíveis.
+- **R13 (revertida em R14): planeta grande vira órbita no trilho (desktop)** — o
   planeta centralizado de cada véu (com a revelação cinematográfica)
   sai do centro e a metáfora fica mais literal: o trilho de paradas
   vira uma órbita em miniatura, cada planeta girando dentro do próprio

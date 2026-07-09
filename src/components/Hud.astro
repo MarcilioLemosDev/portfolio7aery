@@ -1,12 +1,5 @@
 ---
-import { paradas, planetas } from '../dados/planetas';
-
-// Mapa id → {planeta, índice}, pra saber qual parada vira órbita e a
-// velocidade relativa de giro (decrescente: Mercúrio mais rápido, Netuno
-// mais lento — mesma lógica de planetas reais, sem levar a extremos).
-const planetaPorId = new Map(
-  planetas.map((planeta, indice) => [planeta.id, { planeta, indice }])
-);
+import { paradas } from '../dados/planetas';
 
 const idiomas = [
   { code: 'pt', href: '/', label: 'PT-BR' },
@@ -55,44 +48,16 @@ const atual = idiomas.find((i) => i.code === (Astro.currentLocale ?? 'pt')) ?? i
 </header>
 <nav class="hud-stops" aria-label="Paradas da travessia">
   {
-    paradas.map((parada) => {
-      const info = planetaPorId.get(parada.id);
-      if (!info) {
-        return (
-          <button
-            type="button"
-            class="hud-stop"
-            data-stop={parada.id}
-            aria-label={`Ir para ${parada.label}`}
-          >
-            <span class="mono">{parada.label}</span>
-            <i />
-          </button>
-        );
-      }
-      const velocidade = (1.6 - info.indice * 0.18).toFixed(2);
-      return (
-        <button
-          type="button"
-          class="hud-stop hud-stop-orbit"
-          data-stop={parada.id}
-          aria-label={`Ir para ${parada.label}`}
-        >
-          <span class="mono">{parada.label}</span>
-          <span class="rail-orbit">
-            <span class="rail-pivot" data-rail-pivot data-speed={velocidade}>
-              <img
-                class="rail-planet"
-                src={info.planeta.img}
-                alt=""
-                width="18"
-                height="18"
-                loading="lazy"
-              />
-            </span>
-          </span>
-        </button>
-      );
-    })
+    paradas.map((parada) => (
+      <button
+        type="button"
+        class="hud-stop"
+        data-stop={parada.id}
+        aria-label={`Ir para ${parada.label}`}
+      >
+        <span class="mono">{parada.label}</span>
+        <i />
+      </button>
+    ))
   }
 </nav>

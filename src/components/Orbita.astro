@@ -1,0 +1,58 @@
+---
+import { planetas } from '../dados/planetas';
+
+// Órbita única: os 8 planetas giram numa mesma elipse (círculo no chão visto
+// de frente). O scroll vertical dirige a rotação — sensação de movimento
+// lateral/giratório. Cada planeta faz sua passagem mais próxima do observador
+// (frente da elipse: maior, mais nítido, na frente dos outros) e o texto do
+// véu correspondente aparece. Toda a posição/escala é aplicada pelo script
+// central do index.astro (data-orbita-*). Fallback sem JS: lista legível.
+---
+
+<section class="orbita" id="orbita" data-orbita aria-label="A travessia dos véus">
+  <div class="orbita-stage" data-orbita-stage>
+    <div class="orbita-ring" aria-hidden="true"></div>
+
+    <div class="orbita-planetas" data-orbita-planetas>
+      {
+        planetas.map((planeta, indice) => (
+          <div
+            class="orbita-planeta"
+            data-orbita-planeta
+            data-index={indice}
+            data-shape={planeta.shape}
+            style={`--glow:${planeta.glow}`}
+          >
+            <img
+              src={planeta.img}
+              alt={planeta.alt}
+              width="240"
+              height="240"
+              loading={indice < 2 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="orbita-textos" data-orbita-textos>
+      {
+        planetas.map((planeta, indice) => (
+          <div
+            class="orbita-texto"
+            data-orbita-texto
+            data-index={indice}
+            data-active={indice === 0 ? 'true' : 'false'}
+          >
+            <p class="mono p-eyebrow">
+              {String(indice + 1).padStart(2, '0')} · {planeta.tema}
+            </p>
+            <h2>{planeta.titulo}</h2>
+            <p class="p-frase">{planeta.frase}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
