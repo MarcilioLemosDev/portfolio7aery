@@ -25,7 +25,7 @@ export const planetas: Planeta[] = [
     tema: 'A nova loja',
     titulo: 'A loja do empresário mudou de endereço.',
     frase:
-      'Se toda operação pode virar algoritmo, a nova loja é um funil online, aberta o dia inteiro, gerando leads enquanto o negócio opera.',
+      'Antes, era ponto físico e estrutura para manter. Hoje a loja é um funil digital: aberta 24 horas, gerando leads o tempo todo.',
     img: '/space/mercurio.jpg',
     alt: 'Mosaico global de Mercúrio registrado pela sonda MESSENGER (NASA)',
     glow: 'rgba(205, 200, 192, 0.5)',
