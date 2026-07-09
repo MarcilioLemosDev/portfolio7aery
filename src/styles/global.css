@@ -847,6 +847,13 @@ main {
   letter-spacing: 0.18em;
 }
 
+.prova-hint {
+  color: var(--faint);
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  opacity: 0.75;
+}
+
 .prova-frase {
   color: var(--dim);
   font-size: 0.95rem;
