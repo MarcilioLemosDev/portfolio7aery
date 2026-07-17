@@ -1,8 +1,8 @@
-# Conceito — 7Aery (portfólio de Marcílio Lemos)
+# Conceito — WonderSpace (portfólio de Marcílio Lemos)
 
 ## A marca
 
-O projeto chama-se **7Aery** (logo em `public/logo.svg`, ciano
+O projeto chama-se **WonderSpace** (logo em `public/logo.svg`, ciano
 `#3cc9e9`). O site é acessado a partir do perfil profissional do
 Marcílio no Instagram — quem chega já sabe quem ele é. Por isso:
 
@@ -38,7 +38,7 @@ nebulosas, estrelas nomeadas.
 ## Como o produto se vende: a nova loja
 
 O paralelo central da venda (fio do site, a partir da R6): quem quer
-empreender pensa em "abrir uma loja". O produto da 7Aery **é** a loja —
+empreender pensa em "abrir uma loja". O produto da WonderSpace **é** a loja —
 na forma moderna. Se toda operação pode ser traduzida em algoritmo, o
 funil online é a própria estrutura que gera leads para o empresário:
 
@@ -126,7 +126,7 @@ Proveniência das imagens atuais: `public/space/credits.json`.
 - **R2 (feita): migração para Astro** — mesma UX/UI, agora no framework
   do site da MI6 (Astro estático), para o deploy na Vercel se comportar
   como o do mi6-site (preview por branch, sem os 404 do import inicial).
-- **R3 (feita): marca e calibragem** — identidade 7Aery no herói (logo +
+- **R3 (feita): marca e calibragem** — identidade WonderSpace no herói (logo +
   captação imediata), copy sem primeira pessoa, recorte dos planetas com
   máscara suave (Júpiter trocado pelo disco completo do Hubble/ESA) e
   rolagem ~20% mais curta.

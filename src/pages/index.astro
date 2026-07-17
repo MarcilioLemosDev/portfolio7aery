@@ -13,7 +13,7 @@ import Aplicacao from '../components/Aplicacao.astro';
 const site = Astro.site ?? new URL('http://localhost:4321');
 const canonical = new URL('/', site).href;
 const ogImg = new URL('/space/sol.jpg', site).href;
-const titulo = '7Aery · Ambiente 100% digital sob medida para o seu negócio';
+const titulo = 'WonderSpace · Ambiente 100% digital sob medida para o seu negócio';
 const descricao =
   'Traga seus serviços para o digital com custos até 90% abaixo do mercado físico tradicional. Interfaces responsivas que direcionam seus clientes para a zona quente de fechamento. Trabalhos somente por aplicação. Projeto de Marcílio Lemos.';
 ---
@@ -210,6 +210,14 @@ const descricao =
       stopButtons.forEach((b) => {
         const id = b.dataset.stop!;
         b.addEventListener('click', () => {
+          // "sol" = voltar ao topo. O herói é pinado (ScrollTrigger o envolve
+          // num pin-spacer), então o elemento #sol fica no fim desse espaço,
+          // não em 0 — rolar para #sol pararia no meio. Vamos direto ao topo.
+          if (id === 'sol') {
+            if (lenis) lenis.scrollTo(0, { duration: 1.2 });
+            else window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+          }
           const alvo = document.getElementById(id);
           if (!alvo) return;
           if (lenis) lenis.scrollTo(alvo, { duration: 1.6 });
@@ -305,7 +313,7 @@ const descricao =
           ...dados,
         };
         try {
-          const key = '7aery.fila';
+          const key = 'wonderspace.fila';
           const fila = JSON.parse(localStorage.getItem(key) ?? '[]');
           fila.push(entry);
           localStorage.setItem(key, JSON.stringify(fila));

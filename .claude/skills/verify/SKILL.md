@@ -63,7 +63,7 @@ const { chromium } = require('/home/user/portfolio7aery/node_modules/playwright-
    deve ser `none` quando a variante for `rede`.
 7. **Fila e submit** — submit vazio deve deixar `[data-apply-done]`
    `hidden`; preencher nome/e-mail/mensagem correta faz aparecer `done`
-   e grava em `localStorage["7aery.fila"]` (`tipo`, `missao` do preset
+   e grava em `localStorage["wonderspace.fila"]` (`tipo`, `missao` do preset
    quando houver, `nome`).
 8. **HUD** — clicar `.hud-link` navega (Lenis scrollTo); classe
    `.rolou` na `.hud-top` após rolar 60px; `[data-hud-pct]` > 0; CTA

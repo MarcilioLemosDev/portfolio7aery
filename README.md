@@ -1,6 +1,6 @@
 # portfolio7aery
 
-Site institucional da **7Aery** — sites, apps e produtos digitais sob
+Site institucional da **WonderSpace** — sites, apps e produtos digitais sob
 aplicação, projeto de **Marcílio Lemos** (Desenvolvedor de Software ·
 Brasil).
 
@@ -44,7 +44,7 @@ src/
 ├── dados/planetas.ts          # dados das 8 seções + paradas do trilho
 └── styles/global.css          # tokens e todo o CSS
 public/
-├── logo.svg, favicon.svg      # marca 7Aery (ciano #3cc9e9)
+├── logo.svg, favicon.svg      # marca WonderSpace (ciano #3cc9e9)
 ├── logo-mi6.png               # prova social (do repo mi6-site)
 └── space/*.jpg + credits.json # iconografia NASA/ESA, com proveniência
 ```
@@ -66,7 +66,7 @@ publica a partir de `main`.
 
 Framework detectado: **Astro**. Diretório de saída: **`dist`**. Sem
 variáveis de ambiente por enquanto (os formulários registram em
-`localStorage["7aery.fila"]` — integração de backend é rodada futura).
+`localStorage["wonderspace.fila"]` — integração de backend é rodada futura).
 
 `vercel.json` adiciona headers de segurança e cache imutável para
 `/space/*`.
@@ -96,7 +96,7 @@ console. Rode via `/verify` numa sessão Claude Code, ou siga o
 
 ## Estado atual do produto
 
-- **Formulários registram em `localStorage`** ("7aery.fila") e mostram
+- **Formulários registram em `localStorage`** ("wonderspace.fila") e mostram
   o estado de sucesso. Integração real (e-mail / planilha / CRM) fica
   para rodada futura.
 - **Sem preços públicos.** Todo produto abre o mesmo diálogo de

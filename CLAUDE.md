@@ -85,7 +85,7 @@ estático, deploy na Vercel (preview por branch).
 - O Sol do herói usa `vmax` (não `vmin`) — em retrato o disco precisa
   transbordar a tela; scrim reforçado via media query ≤700px
 - Diálogo único `Aplicacao.astro` (variantes `projeto`/`rede`, abertas
-  por `[data-aplicar]`), grava em `localStorage["7aery.fila"]`; campos da
+  por `[data-aplicar]`), grava em `localStorage["wonderspace.fila"]`; campos da
   variante inativa ficam `disabled` (fora do FormData); **sem backend**
 - Design tokens e todo o CSS em `src/styles/global.css` (`--bg`, `--ink`,
   `--gold`…); fontes via Fontsource importadas no frontmatter do
@@ -95,7 +95,7 @@ estático, deploy na Vercel (preview por branch).
 
 ## Convenções
 
-- **Marca: 7Aery** (logo `public/logo.svg`, ciano `#3cc9e9`). O site é
+- **Marca: WonderSpace** (logo `public/logo.svg`, ciano `#3cc9e9`). O site é
   acessado pelo Instagram profissional do Marcílio — a marca assina o
   herói; o nome dele fica no rodapé. Copy **sem primeira pessoa e sem
   frases de efeito**; captação (aplicação/fila) presente já no herói
