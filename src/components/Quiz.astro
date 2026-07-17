@@ -1,0 +1,253 @@
+---
+// Quiz de qualificação: uma pergunta por tela, aquece o visitante e termina
+// na mesma fila de espera (localStorage["wonderspace.fila"]), agora com todas
+// as respostas anexadas. Abre por qualquer botão [data-quiz]. Comportamento
+// no <script> do próprio componente (empacotado pelo Vite).
+const perguntas = [
+  {
+    id: 'ramo',
+    titulo: 'O seu negócio vive de quê?',
+    opcoes: ['Serviços', 'Produtos', 'Os dois'],
+  },
+  {
+    id: 'descoberta',
+    titulo: 'Hoje, como um cliente novo costuma te encontrar?',
+    opcoes: [
+      'Indicação de quem já conhece',
+      'Redes sociais',
+      'Busca no Google',
+      'Sinceramente, não sei dizer',
+    ],
+  },
+  {
+    id: 'caminho',
+    titulo: 'E quando ele decide comprar, o caminho é…',
+    opcoes: ['Direto no meu WhatsApp', 'Um site ou formulário', 'Não existe um caminho claro'],
+  },
+  {
+    id: 'trava',
+    titulo: 'O que mais segura o seu crescimento agora?',
+    opcoes: [
+      'Chega pouca gente',
+      'Chega gente, mas some antes de fechar',
+      'Fecho, mas não dou conta de organizar',
+    ],
+  },
+  {
+    id: 'urgencia',
+    titulo: 'Se isso pudesse estar resolvido, quando você gostaria?',
+    opcoes: ['O quanto antes', 'Nos próximos meses', 'Ainda estou só olhando'],
+  },
+];
+const total = perguntas.length + 1; // perguntas + captura (o resultado é 100%)
+---
+
+<div class="quiz" data-quiz-overlay hidden aria-modal="true" role="dialog" aria-label="Diagnóstico do seu negócio">
+  <div class="quiz-inner">
+    <header class="quiz-top">
+      <button type="button" class="mono quiz-voltar" data-quiz-voltar hidden>← Voltar</button>
+      <span class="mono quiz-passo"><span data-quiz-n>1</span> / {total}</span>
+      <button type="button" class="mono quiz-fechar" data-quiz-fechar aria-label="Fechar">Fechar</button>
+    </header>
+    <div class="quiz-bar" aria-hidden="true"><i data-quiz-bar></i></div>
+
+    <div class="quiz-palco">
+      {
+        perguntas.map((p, i) => (
+          <section
+            class="quiz-tela quiz-pergunta"
+            data-quiz-tela={`p${i}`}
+            data-pergunta={p.id}
+            hidden={i !== 0}
+          >
+            <p class="mono quiz-eyebrow">Pergunta {String(i + 1).padStart(2, '0')}</p>
+            <h2>{p.titulo}</h2>
+            <div class="quiz-opcoes">
+              {p.opcoes.map((o) => (
+                <button type="button" class="quiz-opcao" data-valor={o}>
+                  {o}
+                </button>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+
+      <section class="quiz-tela quiz-captura" data-quiz-tela="captura" hidden>
+        <p class="mono quiz-eyebrow">Quase lá</p>
+        <h2>Para onde enviamos o seu diagnóstico?</h2>
+        <form data-quiz-form>
+          <div class="field">
+            <label class="mono" for="q-nome">Nome</label>
+            <input id="q-nome" name="nome" type="text" required />
+          </div>
+          <div class="field">
+            <label class="mono" for="q-email">E-mail</label>
+            <input id="q-email" name="email" type="email" required />
+          </div>
+          <div class="field">
+            <label class="mono" for="q-wpp">WhatsApp (opcional)</label>
+            <input id="q-wpp" name="whatsapp" type="tel" inputmode="tel" />
+          </div>
+          <button type="submit" class="quiz-enviar">Ver meu diagnóstico</button>
+        </form>
+      </section>
+
+      <section class="quiz-tela quiz-resultado" data-quiz-tela="resultado" hidden>
+        <p class="mono quiz-eyebrow" data-res-eyebrow></p>
+        <h2 data-res-titulo></h2>
+        <p class="quiz-res-frase" data-res-frase></p>
+        <blockquote class="quiz-citacao">
+          A maior parte do que se ergue terá sumido em mil anos. Vem construir
+          algo que a pedra não alcança.
+          <cite>inspirado no chamado de Tadeu, o construtor · The Chosen</cite>
+        </blockquote>
+        <button type="button" class="quiz-enviar quiz-concluir" data-quiz-fechar>
+          Concluir
+        </button>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+  const overlay = document.querySelector<HTMLElement>('[data-quiz-overlay]');
+  if (overlay) {
+    const telas = Array.from(overlay.querySelectorAll<HTMLElement>('.quiz-tela'));
+    const perguntasTelas = telas.filter((t) => t.classList.contains('quiz-pergunta'));
+    const telaCaptura = overlay.querySelector<HTMLElement>('[data-quiz-tela="captura"]')!;
+    const telaResultado = overlay.querySelector<HTMLElement>('[data-quiz-tela="resultado"]')!;
+    const barra = overlay.querySelector<HTMLElement>('[data-quiz-bar]')!;
+    const nEl = overlay.querySelector<HTMLElement>('[data-quiz-n]')!;
+    const voltarBtn = overlay.querySelector<HTMLElement>('[data-quiz-voltar]')!;
+    const form = overlay.querySelector<HTMLFormElement>('[data-quiz-form]')!;
+    const total = perguntasTelas.length + 1;
+
+    const respostas: Record<string, string> = {};
+    // ordem navegável: as perguntas + a captura (o resultado é terminal)
+    const ordem = [...perguntasTelas, telaCaptura];
+    let passo = 0;
+
+    const mostra = (alvo: HTMLElement) => {
+      telas.forEach((t) => (t.hidden = t !== alvo));
+    };
+
+    const irPara = (i: number) => {
+      passo = i;
+      const alvo = ordem[i];
+      mostra(alvo);
+      nEl.textContent = String(Math.min(i + 1, total));
+      barra.style.width = `${((i + 1) / total) * 100}%`;
+      voltarBtn.hidden = i === 0;
+      // reflete resposta já dada (se voltar)
+      const idPergunta = alvo.dataset.pergunta;
+      if (idPergunta) {
+        alvo.querySelectorAll<HTMLElement>('.quiz-opcao').forEach((b) => {
+          b.dataset.escolhida = String(b.dataset.valor === respostas[idPergunta]);
+        });
+      }
+      const foco = alvo.querySelector<HTMLElement>('.quiz-opcao, input, button');
+      foco?.focus();
+    };
+
+    const abrir = () => {
+      Object.keys(respostas).forEach((k) => delete respostas[k]);
+      form.reset();
+      overlay.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      irPara(0);
+    };
+
+    const fechar = () => {
+      overlay.hidden = true;
+      document.documentElement.style.overflow = '';
+    };
+
+    // botões que abrem o quiz
+    document.querySelectorAll<HTMLElement>('[data-quiz]').forEach((b) => {
+      b.addEventListener('click', (e) => {
+        e.preventDefault();
+        abrir();
+      });
+    });
+    overlay.querySelectorAll<HTMLElement>('[data-quiz-fechar]').forEach((b) => {
+      b.addEventListener('click', fechar);
+    });
+    voltarBtn.addEventListener('click', () => {
+      if (passo > 0) irPara(passo - 1);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.hidden) fechar();
+    });
+
+    // escolha de opção → grava e avança (com um respiro para o clique registrar)
+    perguntasTelas.forEach((tela, i) => {
+      tela.querySelectorAll<HTMLButtonElement>('.quiz-opcao').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const idPergunta = tela.dataset.pergunta!;
+          respostas[idPergunta] = btn.dataset.valor!;
+          tela.querySelectorAll<HTMLElement>('.quiz-opcao').forEach((b) => {
+            b.dataset.escolhida = String(b === btn);
+          });
+          window.setTimeout(() => irPara(i + 1), 220);
+        });
+      });
+    });
+
+    const faixaDe = (r: Record<string, string>) => {
+      if (r.urgencia === 'O quanto antes') return 'quente';
+      if (r.urgencia === 'Nos próximos meses') return 'morno';
+      return 'frio';
+    };
+    const textos: Record<string, { eyebrow: string; titulo: string; frase: string }> = {
+      quente: {
+        eyebrow: 'Diagnóstico · prioridade',
+        titulo: 'O seu negócio está pronto para sair do papel.',
+        frase:
+          'Você entrou na frente da fila. Em breve retornamos com o seu diagnóstico e o caminho digital do seu negócio.',
+      },
+      morno: {
+        eyebrow: 'Diagnóstico · em preparo',
+        titulo: 'Seu diagnóstico está sendo preparado.',
+        frase:
+          'Você está na fila. Vamos montar o caminho digital do seu negócio e retornar quando estiver pronto.',
+      },
+      frio: {
+        eyebrow: 'Diagnóstico · no radar',
+        titulo: 'Começar a olhar já é o primeiro passo.',
+        frase: 'Você ficou no radar. Quando quiser destravar, é só voltar aqui.',
+      },
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const dados = Object.fromEntries(new FormData(form).entries());
+      const faixa = faixaDe(respostas);
+      const entrada = {
+        quando: new Date().toISOString(),
+        tipo: 'quiz',
+        faixa,
+        nome: dados.nome ?? '',
+        email: dados.email ?? '',
+        whatsapp: dados.whatsapp ?? '',
+        respostas: { ...respostas },
+      };
+      try {
+        const key = 'wonderspace.fila';
+        const fila = JSON.parse(localStorage.getItem(key) ?? '[]');
+        fila.push(entrada);
+        localStorage.setItem(key, JSON.stringify(fila));
+      } catch {
+        /* armazenamento indisponível — segue só em memória */
+      }
+      const t = textos[faixa];
+      overlay.querySelector<HTMLElement>('[data-res-eyebrow]')!.textContent = t.eyebrow;
+      overlay.querySelector<HTMLElement>('[data-res-titulo]')!.textContent = t.titulo;
+      overlay.querySelector<HTMLElement>('[data-res-frase]')!.textContent = t.frase;
+      mostra(telaResultado);
+      nEl.textContent = String(total);
+      barra.style.width = '100%';
+      voltarBtn.hidden = true;
+    });
+  }
+</script>

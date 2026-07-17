@@ -23,14 +23,25 @@ estático, deploy na Vercel (preview por branch).
   `/fr/` servem automaticamente o conteúdo pt-BR até a tradução real
   (rodada futura). Seletor de idioma no `Hud.astro` (`Astro.currentLocale`
   + links `hreflang`); toggle do menu no script central
-- Estrutura atual (enxugada na R15, ver `docs/CONCEITO.md`): a home tem
-  só **`Heroi`** (Sol, pinned + véu) **→ `ProvaSocial`** (MI6, logo em
-  `public/logo-mi6.png`) dentro do `<main>`; `Hud` (appbar) e
-  `Aplicacao` (diálogo) fora do `<main>`; `Rodape` no fim. Órbita dos
+- Estrutura atual (WonderSpace, landing qualificadora — ver
+  `docs/CONCEITO.md`): a home tem só **`Heroi`** (Sol, pinned + véu)
+  **→ `ProvaSocial`** (MI6, logo em `public/logo-mi6.png`) dentro do
+  `<main>`; `Hud` (appbar), `Aplicacao` (diálogo simples) e `Quiz`
+  (funil de qualificação) fora do `<main>`; `Rodape` no fim. Órbita dos
   véus, Produtos e Trabalhe conosco foram **removidos** (componentes
   `Orbita`/`Produtos`/`Rede` deletados; `planetas.ts` + imagens ficam no
-  repo caso voltem). Captação: CTA do hero e `Aplicar` do appbar abrem
-  o diálogo `projeto`
+  repo caso voltem)
+- **Quiz de qualificação (`Quiz.astro`)**: overlay em tela cheia, uma
+  pergunta por tela (5 perguntas + captura + resultado), barra de
+  progresso, botão voltar, ESC fecha. Abre por qualquer `[data-quiz]`
+  (CTA do hero "Descobrir o diagnóstico" e o botão "Diagnóstico" do
+  appbar). Faixa quente/morno/frio vem da pergunta de urgência; cada
+  faixa tem um texto de resultado diferente + a citação de The Chosen
+  (Tadeu, o construtor). Grava na **mesma fila** de sempre
+  (`localStorage["wonderspace.fila"]`), com `tipo:"quiz"`, `faixa` e o
+  objeto `respostas` completo anexado. Lógica no `<script>` do próprio
+  componente. O link "Prefiro falar direto" no hero (`[data-aplicar]`)
+  abre o diálogo simples de sempre — escape para quem não quer o quiz
 - **A narrativa dos véus NÃO nomeia os planetas nem usa a palavra
   "véu" na copy visível** (jargão zero desde a R7) e segue o fio da
   "nova loja" (ver `docs/CONCEITO.md`): seções 01–04 = tese → vitrine →

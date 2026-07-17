@@ -156,6 +156,22 @@ Proveniência das imagens atuais: `public/space/credits.json`.
   design e produto; "vagas limitadas · detalhes na conversa"). O
   conceito dos véus segue vivo como estrutura visual — só não é mais
   nomeado.
+- **R17 (feita): WonderSpace + quiz de qualificação** — o projeto vira a
+  página empresarial da **WonderSpace** (rebrand de 7Aery em todo o
+  visível + chave de storage). Sobre a home enxuta (hero + prova social)
+  entra um **quiz conversacional** de qualificação (`Quiz.astro`): uma
+  pergunta por tela, 5 perguntas que aquecem o visitante (ramo →
+  descoberta → caminho de compra → o que trava → urgência), tela de
+  captura (nome/e-mail/WhatsApp) e resultado personalizado por faixa
+  (quente/morno/frio, definida pela urgência). Estado da arte 2026 de
+  quiz funnel: uma pergunta por vez, captura no fim (reciprocidade),
+  resultado por faixa em vez de "obrigado" genérico. O lead termina na
+  **mesma fila de espera** (localStorage), agora com o perfil inteiro
+  anexado — sem backend, mas rico para quando ligar um CRM. Escape
+  "Prefiro falar direto" abre o diálogo simples. Citação discreta de
+  The Chosen (chamado de Tadeu, o construtor) no fecho do resultado,
+  como selo, creditada. Bug de navegação corrigido na mesma leva: a
+  marca "voltar ao topo" parava em ~495px (pin do herói) e agora vai a 0.
 - **R15 (feita): enxugar a home** — cliente pediu para remover todo o
   corpo de informação e deixar só o que já estava revisado: **hero
   (home) + prova social + appbar + rodapé**. Removidas do site a órbita

@@ -9,6 +9,7 @@ import Heroi from '../components/Heroi.astro';
 import ProvaSocial from '../components/ProvaSocial.astro';
 import Rodape from '../components/Rodape.astro';
 import Aplicacao from '../components/Aplicacao.astro';
+import Quiz from '../components/Quiz.astro';
 
 const site = Astro.site ?? new URL('http://localhost:4321');
 const canonical = new URL('/', site).href;
@@ -54,6 +55,7 @@ const descricao =
     </main>
     <Rodape />
     <Aplicacao />
+    <Quiz />
 
     <script>
       import gsap from 'gsap';
