@@ -412,6 +412,58 @@ main {
   }
 }
 
+/* Órbita ambiente: planetas girando na faixa inferior do herói, vindo dos
+   lados (visão de dentro da elipse). Acima do scrim, abaixo do véu — o véu
+   ao subir cobre a órbita junto com a Terra. Sem interação. */
+.orbita-ambiente {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(100%, 80rem);
+  height: 42%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb-a {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(2.4rem, 7vw, 5rem);
+  aspect-ratio: 1;
+  will-change: transform, opacity, filter;
+  /* posição/escala/z/opacidade/brilho vêm do script por frame */
+}
+
+.orb-a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  /* mesma vinheta radial suave dos discos: some antes da borda nítida */
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    #000 62%,
+    rgba(0, 0, 0, 0.55) 78%,
+    transparent 87%
+  );
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    #000 62%,
+    rgba(0, 0, 0, 0.55) 78%,
+    transparent 87%
+  );
+  filter: drop-shadow(0 0 14px var(--glow, rgba(60, 201, 233, 0.25)));
+}
+
+@media (max-width: 700px) {
+  .orbita-ambiente {
+    height: 34%;
+  }
+}
+
 .hero-veil {
   position: absolute;
   inset: 0;

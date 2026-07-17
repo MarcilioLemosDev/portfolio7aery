@@ -1,6 +1,8 @@
 ---
 // Herói: a Terra ao fundo (combina com o ciano da logo), sob o mesmo véu que
-// o Sol tinha. Promessa de categoria + captação imediata.
+// o Sol tinha. Promessa de categoria + captação imediata. A órbita ambiente
+// (planetas vindo dos lados, giro constante) fica entre o scrim e o véu.
+import Orbita from './Orbita.astro';
 ---
 
 <section id="sol" class="hero">
@@ -14,6 +16,7 @@
     />
   </div>
   <div class="hero-scrim" aria-hidden="true"></div>
+  <Orbita />
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="hero-copy">
     <img class="hero-logo" src="/logo.svg" alt="" width="200" height="200" />
