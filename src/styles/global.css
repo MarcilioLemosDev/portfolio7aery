@@ -6,8 +6,10 @@
   --dim: #9aa3ba;
   --faint: #626a80;
   --line: rgba(236, 238, 246, 0.13);
-  --gold: #f2c988;
-  --gold-deep: #c9964f;
+  /* Acento = ciano da logo WonderSpace (#3cc9e9). Os nomes --gold/--gold-deep
+     são legado da paleta dourada anterior; hoje seguram o ciano. */
+  --gold: #3cc9e9;
+  --gold-deep: #2a9cc0;
   --blue: #9db8ff;
   --sans: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
@@ -46,7 +48,7 @@ body {
 }
 
 ::selection {
-  background: rgba(242, 201, 136, 0.28);
+  background: rgba(60, 201, 233, 0.28);
 }
 
 img {
@@ -161,7 +163,7 @@ main {
   padding: 0.5rem 1.1rem;
   border-radius: 99px;
   background: var(--gold);
-  color: #171006;
+  color: #04121a;
   font-weight: 500;
   letter-spacing: 0.18em;
   transition: filter 0.25s;
@@ -189,7 +191,7 @@ main {
 }
 
 .hud-lang-btn:hover {
-  border-color: rgba(242, 201, 136, 0.4);
+  border-color: rgba(60, 201, 233, 0.4);
   color: var(--ink);
 }
 
@@ -321,7 +323,7 @@ main {
 .hud-stop[data-active='true'] i {
   background: var(--gold);
   border-color: var(--gold);
-  box-shadow: 0 0 10px rgba(242, 201, 136, 0.8);
+  box-shadow: 0 0 10px rgba(60, 201, 233, 0.8);
 }
 
 @media (max-width: 1000px) {
@@ -484,7 +486,7 @@ main {
   padding: 1rem 2.4rem;
   border-radius: 0.65rem;
   background: var(--gold);
-  color: #171006;
+  color: #04121a;
   font-family: var(--mono);
   font-size: 0.66rem;
   letter-spacing: 0.2em;
@@ -756,8 +758,8 @@ main {
 
 .tier:hover {
   transform: translateY(-5px);
-  border-color: rgba(242, 201, 136, 0.4);
-  box-shadow: 0 18px 60px -30px rgba(242, 201, 136, 0.35);
+  border-color: rgba(60, 201, 233, 0.4);
+  box-shadow: 0 18px 60px -30px rgba(60, 201, 233, 0.35);
 }
 
 .tier .mono {
@@ -793,7 +795,7 @@ main {
 .tier-cta:hover {
   background: var(--gold);
   border-color: var(--gold);
-  color: #171006;
+  color: #04121a;
 }
 
 .tier-plus {
@@ -803,12 +805,12 @@ main {
   justify-content: space-between;
   gap: 2rem;
   flex-wrap: wrap;
-  border-color: rgba(242, 201, 136, 0.32);
-  background: linear-gradient(120deg, rgba(242, 201, 136, 0.06), rgba(255, 255, 255, 0.02) 55%);
+  border-color: rgba(60, 201, 233, 0.32);
+  background: linear-gradient(120deg, rgba(60, 201, 233, 0.06), rgba(255, 255, 255, 0.02) 55%);
 }
 
 .tier-plus:hover {
-  border-color: rgba(242, 201, 136, 0.55);
+  border-color: rgba(60, 201, 233, 0.55);
 }
 
 .tier-plus-copy {
@@ -977,7 +979,7 @@ main {
   padding: 1rem 2.2rem;
   border-radius: 0.65rem;
   background: var(--gold);
-  color: #171006;
+  color: #04121a;
   font-family: var(--mono);
   font-size: 0.66rem;
   letter-spacing: 0.2em;
@@ -1083,7 +1085,7 @@ main {
   justify-self: start;
   margin-top: 0.2rem;
   padding: 0.32rem 0.7rem;
-  border: 1px solid rgba(242, 201, 136, 0.35);
+  border: 1px solid rgba(60, 201, 233, 0.35);
   border-radius: 99px;
   color: var(--gold);
   font-size: 0.56rem;
@@ -1123,7 +1125,7 @@ main {
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-color: rgba(242, 201, 136, 0.55);
+  border-color: rgba(60, 201, 233, 0.55);
   background: rgba(255, 255, 255, 0.055);
 }
 
@@ -1138,7 +1140,7 @@ main {
   padding: 0.9rem 1rem;
   border-radius: 0.6rem;
   background: var(--gold);
-  color: #171006;
+  color: #04121a;
   font-family: var(--mono);
   font-size: 0.62rem;
   letter-spacing: 0.18em;
@@ -1334,13 +1336,13 @@ main {
 }
 
 .quiz-opcao:hover {
-  border-color: rgba(242, 201, 136, 0.45);
+  border-color: rgba(60, 201, 233, 0.45);
   transform: translateX(3px);
 }
 
 .quiz-opcao[data-escolhida='true'] {
   border-color: var(--gold);
-  background: rgba(242, 201, 136, 0.1);
+  background: rgba(60, 201, 233, 0.1);
 }
 
 .quiz-captura form {
@@ -1353,7 +1355,7 @@ main {
   padding: 1rem 1.2rem;
   border-radius: 0.65rem;
   background: var(--gold);
-  color: #171006;
+  color: #04121a;
   font-family: var(--mono);
   font-size: 0.66rem;
   letter-spacing: 0.18em;
@@ -1373,7 +1375,7 @@ main {
 }
 
 .quiz-citacao {
-  border-left: 2px solid rgba(242, 201, 136, 0.5);
+  border-left: 2px solid rgba(60, 201, 233, 0.5);
   padding: 0.2rem 0 0.2rem 1.1rem;
   color: var(--dim);
   font-style: italic;
