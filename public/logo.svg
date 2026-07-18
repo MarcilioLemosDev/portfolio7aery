@@ -1,3 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <path fill="#3cc9e9" d="M71 36 L71 116 A18 18 0 0 0 107 116 L107 84 A4 4 0 0 1 115 84 L115 170 L129 164 L129 84 A18 18 0 0 0 93 84 L93 116 A4 4 0 0 1 85 116 L85 30 Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="BlueDome Team">
+  <defs>
+    <radialGradient id="bd-globe" cx="42%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#7ec8ff" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#2f6bff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#0c1a3c" stop-opacity="0.25"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(50 50)">
+    <circle r="40" fill="url(#bd-globe)"/>
+    <g fill="none" stroke="#8fbcff" stroke-opacity="0.6" stroke-width="1">
+      <circle r="40" stroke-opacity="0.85"/>
+      <ellipse rx="14" ry="40"/>
+      <ellipse rx="28" ry="40"/>
+      <line x1="0" y1="-40" x2="0" y2="40"/>
+      <line x1="-40" y1="0" x2="40" y2="0"/>
+      <path d="M-37.6 -13.7 A 40 40 0 0 1 37.6 -13.7"/>
+      <path d="M-37.6 13.7 A 40 40 0 0 0 37.6 13.7"/>
+    </g>
+    <circle r="6.5" fill="#3cc9e9"/>
+    <g fill="#ffffff">
+      <path d="M-2.4 -8 h4.8 v-16 h-4.8 Z"/>
+      <path d="M0 -30 l5 9 h-10 Z"/>
+      <path d="M-2.4 8 h4.8 v16 h-4.8 Z"/>
+      <path d="M0 30 l5 -9 h-10 Z"/>
+      <path d="M-6 0 C -18 0 -27 -5 -34 -12 l1.6 -3.4 C -26 -9 -17 -4 -6 -4 Z"/>
+      <path d="M-35.5 -13.5 l9 -1.4 -5 7.6 Z"/>
+      <path d="M6 0 C 18 0 27 -5 34 -12 l-1.6 -3.4 C 26 -9 17 -4 6 -4 Z"/>
+      <path d="M35.5 -13.5 l-9 -1.4 5 7.6 Z"/>
+    </g>
+  </g>
 </svg>

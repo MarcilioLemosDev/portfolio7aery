@@ -1,48 +1,28 @@
 ---
-// Quiz de qualificação: uma pergunta por tela, aquece o visitante e termina
-// na mesma fila de espera (localStorage["wonderspace.fila"]), agora com todas
-// as respostas anexadas. Abre por qualquer botão [data-quiz]. Comportamento
+// Formulário qualificado em 5 fases (BlueDome Team / WonderBlues). Uma fase por
+// tela, dentro do mesmo overlay. Abre por qualquer botão [data-quiz]. No fim,
+// envia um POST JSON para o fluxo do Power Automate (grava uma linha por pessoa
+// na planilha); sem URL configurada, roda em modo demonstração. Comportamento
 // no <script> do próprio componente (empacotado pelo Vite).
-const perguntas = [
-  {
-    id: 'ramo',
-    titulo: 'O seu negócio vive de quê?',
-    opcoes: ['Serviços', 'Produtos', 'Os dois'],
-  },
-  {
-    id: 'descoberta',
-    titulo: 'Hoje, como um cliente novo costuma te encontrar?',
-    opcoes: [
-      'Indicação de quem já conhece',
-      'Redes sociais',
-      'Busca no Google',
-      'Sinceramente, não sei dizer',
-    ],
-  },
-  {
-    id: 'caminho',
-    titulo: 'E quando ele decide comprar, o caminho é…',
-    opcoes: ['Direto no meu WhatsApp', 'Um site ou formulário', 'Não existe um caminho claro'],
-  },
-  {
-    id: 'trava',
-    titulo: 'O que mais segura o seu crescimento agora?',
-    opcoes: [
-      'Chega pouca gente',
-      'Chega gente, mas some antes de fechar',
-      'Fecho, mas não dou conta de organizar',
-    ],
-  },
-  {
-    id: 'urgencia',
-    titulo: 'Se isso pudesse estar resolvido, quando você gostaria?',
-    opcoes: ['O quanto antes', 'Nos próximos meses', 'Ainda estou só olhando'],
-  },
+const ESTADOS = [
+  'Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará', 'Distrito Federal',
+  'Espírito Santo', 'Goiás', 'Maranhão', 'Mato Grosso', 'Mato Grosso do Sul',
+  'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco', 'Piauí',
+  'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia',
+  'Roraima', 'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins',
 ];
-const total = perguntas.length + 1; // perguntas + captura (o resultado é 100%)
+const SIGNOS = [
+  'Áries', 'Touro', 'Gêmeos', 'Câncer', 'Leão', 'Virgem',
+  'Libra', 'Escorpião', 'Sagitário', 'Capricórnio', 'Aquário', 'Peixes',
+];
+const TEMPO_TI = [
+  'Ainda não atuo em TI', 'Menos de 1 ano', '1 a 2 anos',
+  '3 a 5 anos', '6 a 10 anos', 'Mais de 10 anos',
+];
+const total = 5;
 ---
 
-<div class="quiz" data-quiz-overlay hidden aria-modal="true" role="dialog" aria-label="Diagnóstico do seu negócio">
+<div class="quiz" data-quiz-overlay hidden aria-modal="true" role="dialog" aria-label="Aplicação para análise de perfil">
   <div class="quiz-inner">
     <header class="quiz-top">
       <button type="button" class="mono quiz-voltar" data-quiz-voltar hidden>← Voltar</button>
@@ -52,197 +32,261 @@ const total = perguntas.length + 1; // perguntas + captura (o resultado é 100%)
     <div class="quiz-bar" aria-hidden="true"><i data-quiz-bar></i></div>
 
     <div class="quiz-palco">
-      {
-        perguntas.map((p, i) => (
-          <section
-            class="quiz-tela quiz-pergunta"
-            data-quiz-tela={`p${i}`}
-            data-pergunta={p.id}
-            hidden={i !== 0}
-          >
-            <p class="mono quiz-eyebrow">Pergunta {String(i + 1).padStart(2, '0')}</p>
-            <h2>{p.titulo}</h2>
-            <div class="quiz-opcoes">
-              {p.opcoes.map((o) => (
-                <button type="button" class="quiz-opcao" data-valor={o}>
-                  {o}
-                </button>
-              ))}
+      <!-- FASE 1 — Quem é você -->
+      <section class="quiz-tela quiz-fase1" data-quiz-tela="f1" data-fase="1">
+        <p class="mono quiz-eyebrow">Fase 01 · Quem é você</p>
+        <h2>Vamos começar por você.</h2>
+        <form data-fase1-form class="quiz-form">
+          <div class="field">
+            <label class="mono" for="q-linkedin">Seu LinkedIn</label>
+            <input id="q-linkedin" name="linkedin" type="url" required
+              placeholder="https://www.linkedin.com/in/seu-perfil" />
+          </div>
+          <div class="quiz-duo">
+            <div class="field">
+              <label class="mono" for="q-idade">Idade</label>
+              <input id="q-idade" name="idade" type="number" min="14" max="120" required placeholder="Ex: 29" />
             </div>
-          </section>
-        ))
-      }
-
-      <section class="quiz-tela quiz-captura" data-quiz-tela="captura" hidden>
-        <p class="mono quiz-eyebrow">Quase lá</p>
-        <h2>Para onde enviamos o seu diagnóstico?</h2>
-        <form data-quiz-form>
-          <div class="field">
-            <label class="mono" for="q-nome">Nome</label>
-            <input id="q-nome" name="nome" type="text" required />
+            <div class="field">
+              <label class="mono" for="q-tempo">Tempo na área de TI</label>
+              <select id="q-tempo" name="tempo_ti" required>
+                <option value="" disabled selected>Selecione</option>
+                {TEMPO_TI.map((t) => <option>{t}</option>)}
+              </select>
+            </div>
           </div>
-          <div class="field">
-            <label class="mono" for="q-email">E-mail</label>
-            <input id="q-email" name="email" type="email" required />
+          <div class="quiz-duo">
+            <div class="field">
+              <label class="mono" for="q-estado">Estado</label>
+              <select id="q-estado" name="estado" required>
+                <option value="" disabled selected>Selecione</option>
+                {ESTADOS.map((e) => <option>{e}</option>)}
+              </select>
+            </div>
+            <div class="field">
+              <label class="mono" for="q-cidade">Cidade</label>
+              <input id="q-cidade" name="cidade" type="text" required placeholder="Sua cidade" />
+            </div>
           </div>
-          <div class="field">
-            <label class="mono" for="q-wpp">WhatsApp (opcional)</label>
-            <input id="q-wpp" name="whatsapp" type="tel" inputmode="tel" />
-          </div>
-          <button type="submit" class="quiz-enviar">Ver meu diagnóstico</button>
+          <button type="submit" class="quiz-enviar">Avançar</button>
         </form>
       </section>
 
-      <section class="quiz-tela quiz-resultado" data-quiz-tela="resultado" hidden>
-        <p class="mono quiz-eyebrow" data-res-eyebrow></p>
-        <h2 data-res-titulo></h2>
-        <p class="quiz-res-frase" data-res-frase></p>
-        <button type="button" class="quiz-enviar quiz-concluir" data-quiz-fechar>
-          Concluir
-        </button>
+      <!-- FASE 2 — Fé -->
+      <section class="quiz-tela quiz-pergunta" data-quiz-tela="f2" data-fase="2" data-pergunta="crenca_jesus" hidden>
+        <p class="mono quiz-eyebrow">Fase 02</p>
+        <h2>Você acredita em Jesus Cristo?</h2>
+        <div class="quiz-opcoes">
+          <button type="button" class="quiz-opcao" data-valor="Sim">Sim</button>
+          <button type="button" class="quiz-opcao" data-valor="Não">Não</button>
+          <button type="button" class="quiz-opcao" data-valor="Ainda estou buscando">Ainda estou buscando</button>
+        </div>
+      </section>
+
+      <!-- FASE 3 — Signo -->
+      <section class="quiz-tela quiz-pergunta" data-quiz-tela="f3" data-fase="3" data-pergunta="signo" hidden>
+        <p class="mono quiz-eyebrow">Fase 03</p>
+        <h2>Qual é o seu signo?</h2>
+        <div class="quiz-opcoes quiz-opcoes--grid">
+          {SIGNOS.map((s) => <button type="button" class="quiz-opcao" data-valor={s}>{s}</button>)}
+        </div>
+      </section>
+
+      <!-- FASE 4 — O chamado -->
+      <section class="quiz-tela quiz-pergunta" data-quiz-tela="f4" data-fase="4" data-pergunta="pacificadores" hidden>
+        <p class="mono quiz-eyebrow">Fase 04 · O chamado</p>
+        <h2>144.000 pacificadores. Você quer fazer parte?</h2>
+        <div class="quiz-opcoes">
+          <button type="button" class="quiz-opcao" data-valor="Sim, quero fazer parte">Sim, quero fazer parte</button>
+          <button type="button" class="quiz-opcao" data-valor="Quero entender melhor antes">Quero entender melhor antes</button>
+          <button type="button" class="quiz-opcao" data-valor="Não">Não</button>
+        </div>
+      </section>
+
+      <!-- FASE 5 — Aplicação -->
+      <section class="quiz-tela quiz-captura" data-quiz-tela="f5" data-fase="5" hidden>
+        <p class="mono quiz-eyebrow">Fase 05 · Aplicação</p>
+        <h2>Confere pra mim antes de enviar?</h2>
+        <dl class="quiz-review" data-review></dl>
+        <label class="quiz-consent">
+          <input type="checkbox" name="consentimento" data-consent />
+          <span>Confirmo que respondi com sinceridade e autorizo o contato para a análise de perfil.</span>
+        </label>
+        <p class="quiz-erro mono" data-erro hidden></p>
+        <button type="button" class="quiz-enviar" data-enviar>Aplicar para análise de perfil</button>
+      </section>
+
+      <!-- Sucesso -->
+      <section class="quiz-tela quiz-resultado" data-quiz-tela="ok" hidden>
+        <p class="mono quiz-eyebrow">Recebido</p>
+        <h2>Pronto. Você disse sim ao não do mundo.</h2>
+        <p class="quiz-res-frase">
+          Sua aplicação chegou até nós. Se o perfil se encaixar, um dos nossos
+          recrutadores Blues entra em contato — fique de olho na sua caixa de
+          e-mail. Encontros reais, esse é o nosso lema.
+        </p>
+        <button type="button" class="quiz-enviar quiz-concluir" data-quiz-fechar>Fechar</button>
       </section>
     </div>
   </div>
 </div>
 
 <script>
+  const URL_FLUXO = import.meta.env.PUBLIC_POWER_AUTOMATE_URL ?? '';
+
+  const LABELS: Record<string, string> = {
+    linkedin: 'LinkedIn',
+    idade: 'Idade',
+    tempo_ti: 'Tempo em TI',
+    estado: 'Estado',
+    cidade: 'Cidade',
+    crenca_jesus: 'Acredita em Jesus Cristo?',
+    signo: 'Signo',
+    pacificadores: '144.000 Pacificadores',
+  };
+
   const overlay = document.querySelector<HTMLElement>('[data-quiz-overlay]');
   if (overlay) {
     const telas = Array.from(overlay.querySelectorAll<HTMLElement>('.quiz-tela'));
-    const perguntasTelas = telas.filter((t) => t.classList.contains('quiz-pergunta'));
-    const telaCaptura = overlay.querySelector<HTMLElement>('[data-quiz-tela="captura"]')!;
-    const telaResultado = overlay.querySelector<HTMLElement>('[data-quiz-tela="resultado"]')!;
+    const fases = ['f1', 'f2', 'f3', 'f4', 'f5'];
     const barra = overlay.querySelector<HTMLElement>('[data-quiz-bar]')!;
     const nEl = overlay.querySelector<HTMLElement>('[data-quiz-n]')!;
     const voltarBtn = overlay.querySelector<HTMLElement>('[data-quiz-voltar]')!;
-    const form = overlay.querySelector<HTMLFormElement>('[data-quiz-form]')!;
-    const total = perguntasTelas.length + 1;
+    const fase1Form = overlay.querySelector<HTMLFormElement>('[data-fase1-form]')!;
+    const reviewEl = overlay.querySelector<HTMLElement>('[data-review]')!;
+    const consentEl = overlay.querySelector<HTMLInputElement>('[data-consent]')!;
+    const erroEl = overlay.querySelector<HTMLElement>('[data-erro]')!;
+    const enviarBtn = overlay.querySelector<HTMLButtonElement>('[data-enviar]')!;
+    const total = fases.length;
 
     const respostas: Record<string, string> = {};
-    // ordem navegável: as perguntas + a captura (o resultado é terminal)
-    const ordem = [...perguntasTelas, telaCaptura];
     let passo = 0;
 
-    const mostra = (alvo: HTMLElement) => {
-      telas.forEach((t) => (t.hidden = t !== alvo));
-    };
+    const telaDe = (id: string) => overlay.querySelector<HTMLElement>(`[data-quiz-tela="${id}"]`)!;
+    const mostra = (alvo: HTMLElement) => telas.forEach((t) => (t.hidden = t !== alvo));
 
     const irPara = (i: number) => {
-      passo = i;
-      const alvo = ordem[i];
+      passo = Math.max(0, Math.min(total - 1, i));
+      const alvo = telaDe(fases[passo]);
       mostra(alvo);
-      nEl.textContent = String(Math.min(i + 1, total));
-      barra.style.width = `${((i + 1) / total) * 100}%`;
-      voltarBtn.hidden = i === 0;
-      // reflete resposta já dada (se voltar)
+      nEl.textContent = String(passo + 1);
+      barra.style.width = `${((passo + 1) / total) * 100}%`;
+      voltarBtn.hidden = passo === 0;
+      if (fases[passo] === 'f5') montaReview();
       const idPergunta = alvo.dataset.pergunta;
       if (idPergunta) {
         alvo.querySelectorAll<HTMLElement>('.quiz-opcao').forEach((b) => {
           b.dataset.escolhida = String(b.dataset.valor === respostas[idPergunta]);
         });
       }
-      const foco = alvo.querySelector<HTMLElement>('.quiz-opcao, input, button');
-      foco?.focus();
+      alvo.querySelector<HTMLElement>('input, select, .quiz-opcao, button')?.focus();
     };
 
     const abrir = () => {
       Object.keys(respostas).forEach((k) => delete respostas[k]);
-      form.reset();
+      fase1Form.reset();
+      consentEl.checked = false;
+      erroEl.hidden = true;
       overlay.hidden = false;
       document.documentElement.style.overflow = 'hidden';
       irPara(0);
     };
-
     const fechar = () => {
       overlay.hidden = true;
       document.documentElement.style.overflow = '';
     };
 
-    // botões que abrem o quiz
-    document.querySelectorAll<HTMLElement>('[data-quiz]').forEach((b) => {
+    document.querySelectorAll<HTMLElement>('[data-quiz]').forEach((b) =>
       b.addEventListener('click', (e) => {
         e.preventDefault();
         abrir();
-      });
-    });
-    overlay.querySelectorAll<HTMLElement>('[data-quiz-fechar]').forEach((b) => {
-      b.addEventListener('click', fechar);
-    });
-    voltarBtn.addEventListener('click', () => {
-      if (passo > 0) irPara(passo - 1);
-    });
+      })
+    );
+    overlay.querySelectorAll<HTMLElement>('[data-quiz-fechar]').forEach((b) =>
+      b.addEventListener('click', fechar)
+    );
+    voltarBtn.addEventListener('click', () => irPara(passo - 1));
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !overlay.hidden) fechar();
     });
 
-    // escolha de opção → grava e avança (com um respiro para o clique registrar)
-    perguntasTelas.forEach((tela, i) => {
+    // Fase 1 → valida os campos e guarda
+    fase1Form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!fase1Form.reportValidity()) return;
+      new FormData(fase1Form).forEach((v, k) => (respostas[k] = String(v)));
+      irPara(1);
+    });
+
+    // Fases 2–4 → clique grava e avança
+    ['f2', 'f3', 'f4'].forEach((id) => {
+      const tela = telaDe(id);
+      const chave = tela.dataset.pergunta!;
       tela.querySelectorAll<HTMLButtonElement>('.quiz-opcao').forEach((btn) => {
         btn.addEventListener('click', () => {
-          const idPergunta = tela.dataset.pergunta!;
-          respostas[idPergunta] = btn.dataset.valor!;
-          tela.querySelectorAll<HTMLElement>('.quiz-opcao').forEach((b) => {
-            b.dataset.escolhida = String(b === btn);
-          });
-          window.setTimeout(() => irPara(i + 1), 220);
+          respostas[chave] = btn.dataset.valor!;
+          tela.querySelectorAll<HTMLElement>('.quiz-opcao').forEach(
+            (b) => (b.dataset.escolhida = String(b === btn))
+          );
+          window.setTimeout(() => irPara(passo + 1), 200);
         });
       });
     });
 
-    const faixaDe = (r: Record<string, string>) => {
-      if (r.urgencia === 'O quanto antes') return 'quente';
-      if (r.urgencia === 'Nos próximos meses') return 'morno';
-      return 'frio';
-    };
-    const textos: Record<string, { eyebrow: string; titulo: string; frase: string }> = {
-      quente: {
-        eyebrow: 'Diagnóstico · prioridade',
-        titulo: 'O seu negócio está pronto para sair do papel.',
-        frase:
-          'Você entrou na frente da fila. Em breve retornamos com o seu diagnóstico e o caminho digital do seu negócio.',
-      },
-      morno: {
-        eyebrow: 'Diagnóstico · em preparo',
-        titulo: 'Seu diagnóstico está sendo preparado.',
-        frase:
-          'Você está na fila. Vamos montar o caminho digital do seu negócio e retornar quando estiver pronto.',
-      },
-      frio: {
-        eyebrow: 'Diagnóstico · no radar',
-        titulo: 'Começar a olhar já é o primeiro passo.',
-        frase: 'Você ficou no radar. Quando quiser destravar, é só voltar aqui.',
-      },
-    };
+    function montaReview() {
+      reviewEl.innerHTML = '';
+      Object.keys(LABELS).forEach((key) => {
+        const row = document.createElement('div');
+        const dt = document.createElement('dt');
+        const dd = document.createElement('dd');
+        dt.className = 'mono';
+        dt.textContent = LABELS[key];
+        dd.textContent = respostas[key] || '—';
+        row.append(dt, dd);
+        reviewEl.appendChild(row);
+      });
+    }
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const dados = Object.fromEntries(new FormData(form).entries());
-      const faixa = faixaDe(respostas);
-      const entrada = {
-        quando: new Date().toISOString(),
-        tipo: 'quiz',
-        faixa,
-        nome: dados.nome ?? '',
-        email: dados.email ?? '',
-        whatsapp: dados.whatsapp ?? '',
-        respostas: { ...respostas },
-      };
-      try {
-        const key = 'wonderspace.fila';
-        const fila = JSON.parse(localStorage.getItem(key) ?? '[]');
-        fila.push(entrada);
-        localStorage.setItem(key, JSON.stringify(fila));
-      } catch {
-        /* armazenamento indisponível — segue só em memória */
+    // Envio ao Power Automate
+    enviarBtn.addEventListener('click', async () => {
+      if (!consentEl.checked) {
+        erroEl.textContent = 'Marque a confirmação para enviar.';
+        erroEl.hidden = false;
+        return;
       }
-      const t = textos[faixa];
-      overlay.querySelector<HTMLElement>('[data-res-eyebrow]')!.textContent = t.eyebrow;
-      overlay.querySelector<HTMLElement>('[data-res-titulo]')!.textContent = t.titulo;
-      overlay.querySelector<HTMLElement>('[data-res-frase]')!.textContent = t.frase;
-      mostra(telaResultado);
-      nEl.textContent = String(total);
-      barra.style.width = '100%';
-      voltarBtn.hidden = true;
+      erroEl.hidden = true;
+      const payload = {
+        ...respostas,
+        consentimento: 'Sim',
+        origem: '7aery.com',
+        data_envio: new Date().toISOString(),
+      };
+      enviarBtn.disabled = true;
+      const textoOriginal = enviarBtn.textContent;
+      enviarBtn.textContent = 'Enviando…';
+      try {
+        if (!URL_FLUXO) {
+          console.info('[BlueDome] Modo demo — payload que seria enviado:', payload);
+          await new Promise((r) => setTimeout(r, 600));
+        } else {
+          const res = await fetch(URL_FLUXO, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+        }
+        mostra(telaDe('ok'));
+        nEl.textContent = String(total);
+        barra.style.width = '100%';
+        voltarBtn.hidden = true;
+      } catch (err) {
+        console.error(err);
+        erroEl.textContent = 'Não deu pra enviar agora. Tenta de novo em instantes?';
+        erroEl.hidden = false;
+        enviarBtn.disabled = false;
+        enviarBtn.textContent = textoOriginal;
+      }
     });
   }
 </script>

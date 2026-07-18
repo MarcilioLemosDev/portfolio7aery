@@ -6,7 +6,7 @@
   --dim: #9aa3ba;
   --faint: #626a80;
   --line: rgba(236, 238, 246, 0.13);
-  /* Acento = ciano da logo WonderSpace (#3cc9e9). Os nomes --gold/--gold-deep
+  /* Acento = ciano da marca BlueDome (#3cc9e9). Os nomes --gold/--gold-deep
      são legado da paleta dourada anterior; hoje seguram o ciano. */
   --gold: #3cc9e9;
   --gold-deep: #2a9cc0;
@@ -1276,9 +1276,9 @@ main {
   position: fixed;
   inset: 0;
   z-index: 40;
-  background: rgba(4, 5, 10, 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(4, 5, 10, 0.985);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: grid;
   place-items: center;
   overflow-y: auto;
@@ -1457,4 +1457,151 @@ main {
   .quiz-opcao:hover {
     transform: none;
   }
+}
+
+/* ── Formulário de 5 fases (BlueDome) ───────────────────────────────── */
+.field select {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+  border-radius: 0.55rem;
+  padding: 0.72rem 0.85rem;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%239aa3ba' stroke-width='1.4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 0.7rem;
+}
+.field select:focus {
+  outline: none;
+  border-color: rgba(60, 201, 233, 0.55);
+  background-color: rgba(255, 255, 255, 0.055);
+}
+.field option {
+  background: var(--bg-raise);
+  color: var(--ink);
+}
+
+.quiz-form {
+  display: grid;
+  gap: 1.05rem;
+}
+.quiz-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.05rem;
+}
+@media (max-width: 34rem) {
+  .quiz-duo {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quiz-opcoes--grid {
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+}
+.quiz-opcoes--grid .quiz-opcao {
+  text-align: center;
+}
+
+.quiz-review {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+.quiz-review div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.62rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.quiz-review dt {
+  color: var(--dim);
+  font-size: 0.56rem;
+}
+.quiz-review dd {
+  margin: 0;
+  text-align: right;
+  font-size: 0.92rem;
+  color: var(--ink);
+  word-break: break-word;
+  max-width: 62%;
+}
+
+.quiz-consent {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  color: var(--dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.quiz-consent input {
+  margin-top: 0.2rem;
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  accent-color: var(--gold);
+}
+
+.quiz-erro {
+  color: #ff8095;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+.quiz-erro[hidden] {
+  display: none;
+}
+
+/* ── Manifesto WonderBlues (seção pós-herói) ────────────────────────── */
+.manifesto {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+.manifesto-titulo {
+  font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  max-width: 22ch;
+}
+.manifesto-titulo em {
+  color: var(--gold);
+  font-style: normal;
+}
+.manifesto-texto {
+  display: grid;
+  gap: 1.05rem;
+  margin-top: 0.4rem;
+  color: var(--dim);
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  line-height: 1.65;
+  max-width: 42ch;
+}
+.manifesto-texto strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.manifesto-destaque {
+  color: var(--ink);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 300;
+  line-height: 1.4;
+  border-left: 2px solid rgba(60, 201, 233, 0.5);
+  padding-left: 1.1rem;
+}
+.manifesto-nota {
+  font-size: 0.9rem;
+  color: var(--faint);
+  border-top: 1px solid var(--line);
+  padding-top: 1.05rem;
+}
+.prova-cta {
+  margin-top: 0.6rem;
+  justify-self: start;
 }

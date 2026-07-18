@@ -3,10 +3,10 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 // Site estático para deploy na Vercel (preview por branch, produção na main).
-// `site` gera canonical + sitemap. Domínio de produção: marciliolemos.dev
+// `site` gera canonical + sitemap. Domínio de produção: 7aery.com
 // (a atribuição do domínio + DNS na Vercel é feita no painel).
 export default defineConfig({
-  site: 'https://marciliolemos.dev',
+  site: 'https://7aery.com',
   output: 'static',
   integrations: [sitemap()],
   i18n: {

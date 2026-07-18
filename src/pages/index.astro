@@ -8,15 +8,14 @@ import Hud from '../components/Hud.astro';
 import Heroi from '../components/Heroi.astro';
 import ProvaSocial from '../components/ProvaSocial.astro';
 import Rodape from '../components/Rodape.astro';
-import Aplicacao from '../components/Aplicacao.astro';
 import Quiz from '../components/Quiz.astro';
 
 const site = Astro.site ?? new URL('http://localhost:4321');
 const canonical = new URL('/', site).href;
 const ogImg = new URL('/space/terra.jpg', site).href;
-const titulo = 'WonderSpace · Ambiente 100% digital sob medida para o seu negócio';
+const titulo = 'BlueDome Team · WonderBlues — 144.000 Pacificadores';
 const descricao =
-  'Traga seus serviços para o digital com custos até 90% abaixo do mercado físico tradicional. Interfaces responsivas que direcionam seus clientes para a zona quente de fechamento. Trabalhos somente por aplicação. Projeto de Marcílio Lemos.';
+  'Um time de profissionais de TI unidos por uma causa maior: a causa do bem. Aplique para a análise de perfil dos WonderBlues. Encontros reais é o nosso lema. 7aery.com';
 ---
 
 <!doctype html>
@@ -54,7 +53,6 @@ const descricao =
       <ProvaSocial />
     </main>
     <Rodape />
-    <Aplicacao />
     <Quiz />
 
     <script>
@@ -241,89 +239,6 @@ const descricao =
           langMenu?.setAttribute('hidden', '');
           langBtn?.setAttribute('aria-expanded', 'false');
         }
-      });
-
-      /* ── Aplicação: diálogo único (projeto / rede) ───────────────────── */
-      const dialog = document.querySelector<HTMLDialogElement>('[data-apply-dialog]');
-      const formView = document.querySelector<HTMLElement>('[data-apply-form]');
-      const doneView = document.querySelector<HTMLElement>('[data-apply-done]');
-      const formEl = document.querySelector<HTMLFormElement>('[data-apply-form-el]');
-      const kicker = document.querySelector<HTMLElement>('[data-apply-kicker]');
-      const titleEl = document.querySelector<HTMLElement>('[data-apply-title]');
-      const presetEl = document.querySelector<HTMLElement>('[data-apply-preset]');
-      const camposProjeto = Array.from(
-        document.querySelectorAll<HTMLElement>('[data-campo-projeto]')
-      );
-      const camposRede = Array.from(
-        document.querySelectorAll<HTMLElement>('[data-campo-rede]')
-      );
-
-      let variante: 'projeto' | 'rede' = 'projeto';
-      let preset: string | null = null;
-
-      function setCampo(campo: HTMLElement, ativo: boolean, obrigatorios: string[]) {
-        campo.hidden = !ativo;
-        campo
-          .querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea')
-          .forEach((el) => {
-            el.disabled = !ativo;
-            el.required = ativo && obrigatorios.includes(el.name);
-          });
-      }
-
-      function abrir(v: 'projeto' | 'rede', p?: string) {
-        if (!dialog || !formView || !doneView || !formEl) return;
-        variante = v;
-        preset = p ?? null;
-        formView.hidden = false;
-        doneView.hidden = true;
-        formEl.reset();
-        const projeto = v === 'projeto';
-        if (kicker) kicker.textContent = projeto ? 'Fila de espera' : 'Trabalhe conosco';
-        if (titleEl)
-          titleEl.textContent = projeto
-            ? 'Aplicar para um projeto'
-            : 'Enviar aplicação para o time';
-        if (presetEl) {
-          presetEl.hidden = !preset;
-          presetEl.textContent = preset ? `Escopo: ${preset}` : '';
-        }
-        camposProjeto.forEach((c) => setCampo(c, projeto, ['mensagem']));
-        camposRede.forEach((c) => setCampo(c, !projeto, ['stack', 'mensagem_rede']));
-        dialog.showModal();
-      }
-
-      document.querySelectorAll<HTMLElement>('[data-aplicar]').forEach((b) => {
-        b.addEventListener('click', () =>
-          abrir(b.dataset.aplicar as 'projeto' | 'rede', b.dataset.preset)
-        );
-      });
-      document.querySelectorAll<HTMLElement>('[data-apply-close]').forEach((b) => {
-        b.addEventListener('click', () => dialog?.close());
-      });
-      dialog?.addEventListener('click', (e) => {
-        if (e.target === dialog) dialog.close();
-      });
-
-      formEl?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const dados = Object.fromEntries(new FormData(formEl).entries());
-        const entry = {
-          quando: new Date().toISOString(),
-          tipo: variante,
-          missao: preset,
-          ...dados,
-        };
-        try {
-          const key = 'wonderspace.fila';
-          const fila = JSON.parse(localStorage.getItem(key) ?? '[]');
-          fila.push(entry);
-          localStorage.setItem(key, JSON.stringify(fila));
-        } catch {
-          /* armazenamento indisponível — segue só em memória */
-        }
-        if (formView) formView.hidden = true;
-        if (doneView) doneView.hidden = false;
       });
     </script>
   </body>
